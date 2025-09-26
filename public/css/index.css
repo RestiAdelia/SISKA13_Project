@@ -1,0 +1,503 @@
+
+        :root {
+            --dark1: #420516;
+            --dark2: #4C0027;
+            --dark3: #A53860;
+            --mid: #EF88AD;
+            --light: #f9e6ed;
+            --gray: #7d7d7d;
+        }
+
+        body {
+            background-color: #fdf7f9;
+            color: var(--dark2);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .bg-section-light {
+            background-color: #ffffff;
+        }
+
+        .bg-section-dark {
+            background-color: #fbeaf0;
+        }
+
+        section {
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .navbar {
+            background: transparent;
+            /* Transparan di awal */
+            box-shadow: none;
+            transition: all 0.3s ease;
+            padding: 0.3rem 1rem;
+            min-height: 55px;
+            backdrop-filter: blur(0px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        /* Navbar setelah scroll */
+        .navbar.scrolled {
+            background: linear-gradient(90deg, var(--dark1), var(--dark2));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Brand / Logo */
+        .navbar-brand {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffffff !important;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+
+        .navbar-nav .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #ffffff !important;
+            padding: 0.4rem 0.8rem;
+            position: relative;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--mid);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--mid) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after,
+        .navbar-nav .nav-link:focus::after {
+            width: 100%;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .hero .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 700px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-hero:hover {
+            background: #f0f0f0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-top: 15px;
+            font-weight: 500;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+
+        .hero .btn {
+            margin-top: 30px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            background-color: var(--dark3);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .hero .btn:hover {
+            background-color: var(--mid);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-weight: 700;
+            color: var(--dark3);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--mid);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img-top {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            object-fit: cover;
+            height: 200px;
+        }
+
+        .card-body h5 {
+            font-weight: 700;
+            color: var(--dark2);
+        }
+
+        .card-body p {
+            color: var(--gray);
+        }
+
+        /* === Section Kepala Sekolah === */
+        #kepsek {
+            background: linear-gradient(135deg, var(--light) 0%, #fff 100%);
+        }
+
+        #kepsek .section-title {
+            color: var(--dark2);
+            font-weight: 700;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        #kepsek .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--dark3);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Foto bulat dengan border */
+        .kepsek-foto {
+            max-width: 250px;
+            border-radius: 50%;
+            border: 6px solid var(--mid);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .kepsek-foto:hover {
+            transform: scale(1.05);
+        }
+
+        /* Nama & Jabatan */
+        .kepsek-nama {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark3);
+        }
+
+        .kepsek-jabatan {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Quote */
+        .kepsek-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--dark1);
+            padding-left: 1rem;
+            border-left: 4px solid var(--mid);
+        }
+
+        #staf-guru .filter-wrapper {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        #staf-guru .filter-btn {
+            background-color: transparent;
+            border: 2px solid var(--mid);
+            color: var(--mid);
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        #staf-guru .filter-btn.active,
+        #staf-guru .filter-btn:hover {
+            background-color: var(--mid);
+            color: var(--dark2);
+            font-weight: 600;
+        }
+
+        /* Cards */
+        #staf-guru .card {
+
+            border-radius: 1rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        #staf-guru .card:hover {
+            transform: scale(1.03);
+        }
+
+        /* Gaya untuk gambar guru */
+        .guru-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--mid);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efek saat hover */
+        .guru-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+
+
+        #lokasi-kontak {
+            padding: 3rem 0;
+        }
+
+        #lokasi-kontak .lokasi-wrapper {
+            border: 2px solid var(--dark3);
+            border-radius: 1rem;
+            background-color: #fff;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+        }
+
+        #lokasi-kontak h2.section-title {
+            color: var(--dark2);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        #lokasi-kontak .map-container,
+        #lokasi-kontak .card {
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #lokasi-kontak iframe {
+            flex: 1;
+            min-height: 400px;
+            border: none;
+        }
+
+        /* === Card Form === */
+        #lokasi-kontak .card {
+            background: var(--light);
+            border-radius: 1rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+            position: relative;
+            /* supaya tidak geser saat fokus */
+            transition: transform 0.2s ease;
+        }
+
+        #lokasi-kontak .card:hover {
+            transform: translateY(-2px);
+        }
+
+        #lokasi-kontak h4 {
+            color: var(--dark3);
+            font-weight: 700;
+        }
+
+        /* Input field */
+        #lokasi-kontak .form-control {
+            border-radius: 0.6rem;
+            border: 1px solid var(--gray);
+            box-shadow: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #lokasi-kontak .form-control:focus {
+            border-color: var(--mid);
+            outline: none;
+            box-shadow: 0 0 5px rgba(239, 136, 173, 0.4);
+        }
+
+        /* Tombol */
+        #lokasi-kontak .btn-success {
+            background-color: var(--dark3);
+            border-color: var(--dark3);
+            border-radius: 0.5rem;
+            font-weight: 600;
+
+        }
+
+        #lokasi-kontak .btn-success:hover {
+            background-color: var(--mid);
+            border-color: var(--mid);
+            color: var(--dark2);
+            transform: scale(1.02);
+        }
+
+        .footer-modern {
+            background-color: var(--dark2);
+        }
+
+        .footer-modern h5,
+        .footer-modern h4 {
+            color: #ffffff;
+        }
+
+        .footer-links li a {
+            color: #f1c6d6;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links li a:hover {
+            color: #ffffff;
+        }
+
+        .social-link {
+            font-size: 1.3rem;
+            color: #f1c6d6;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #ffffff;
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            #kepsek img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .guru-img {
+                width: 80px;
+                height: 80px;
+            }
+        }
