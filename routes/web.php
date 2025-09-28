@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Auth;
 
 // Landing Page
 Route::get('/', function () {
-    return view('landing');
+
+    return view('landing_page');
+
 });
 
 // Login Page
