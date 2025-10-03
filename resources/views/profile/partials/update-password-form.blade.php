@@ -40,7 +40,11 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
+<<<<<<< HEAD
                     class="text-sm text-gray-600 dark:text-gray-400"
+=======
+                    class="text-sm text-gray-600"
+>>>>>>> login-dashboard
                 >{{ __('Saved.') }}</p>
             @endif
         </div>
