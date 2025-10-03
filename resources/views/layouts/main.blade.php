@@ -11,23 +11,52 @@
 <body class="h-screen bg-gray-100 font-sans flex">
 
     <!-- Sidebar -->
-    <aside class="w-64 h-screen bg-[#560029] text-white">
-        <div class="px-6 py-4 text-2xl font-bold">SISKA13</div>
-        <nav class="flex-1 px-4 space-y-2">
-            <a href="#" class="flex items-center px-3 py-2 rounded-md bg-white/20">🏠 Dashboard</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-md hover:bg-white/20">👨‍🎓 Data Siswa</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-md hover:bg-white/20">👩‍🏫 Data Guru</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-md hover:bg-white/20">📚 Mata Pelajaran</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-md hover:bg-white/20">📅 Jadwal</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-md hover:bg-white/20">📝 Nilai</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-md hover:bg-white/20">📢 Pengumuman</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-md hover:bg-white/20">⚙️ Pengaturan</a>
+    <aside class="h-screen bg-pink-600 group fixed transition-all duration-300 w-16 hover:w-64">
+        <div class="flex items-center px-3 py-4 space-x-3">
+            <!-- Logo -->
+            <img src="logo.png" alt="Logo" class="w-8 h-8">
+            <!-- Nama sekolah -->
+            <span class="hidden group-hover:inline text-white font-bold">SISKA13</span>
+        </div>
+
+        <nav class="flex flex-col h-full space-y-2 px-2 py-4 text-white">
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>🏠</span>
+                <span class="hidden group-hover:inline">Dashboard</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>👨‍🎓</span>
+                <span class="hidden group-hover:inline">Data Siswa</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>👩‍🏫</span>
+                <span class="hidden group-hover:inline">Data Guru</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>📚</span>
+                <span class="hidden group-hover:inline">Mata Pelajaran</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>📅</span>
+                <span class="hidden group-hover:inline">Jadwal</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>📝</span>
+                <span class="hidden group-hover:inline">Nilai</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>📢</span>
+                <span class="hidden group-hover:inline">Pengumuman</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-pink-700">
+                <span>⚙️</span>
+                <span class="hidden group-hover:inline">Pengaturan</span>
+            </a>
         </nav>
     </aside>
 
-
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col transition-all duration-300" id="mainContent" style="margin-left: 4rem;">
         <!-- Header -->
         <header class="flex items-center justify-between bg-white px-6 py-3 shadow">
             <h1 class="font-bold text-lg">Dashboard</h1>
@@ -49,7 +78,7 @@
         </header>
 
         <!-- Content -->
-        <main class="flex-1 p-6 overflow-y-auto">
+         <main class="flex-1 p-6 overflow-y-auto">
             <!-- Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <div class="bg-white rounded-lg shadow p-4 flex items-center justify-between">
@@ -142,6 +171,20 @@
             </div>
         </main>
     </div>
+
+    <!-- Script untuk geser konten saat sidebar hover -->
+    <script>
+        const sidebar = document.querySelector('aside');
+        const main = document.getElementById('mainContent');
+
+        sidebar.addEventListener('mouseenter', () => {
+            main.style.marginLeft = '16rem'; // sidebar melebar
+        });
+
+        sidebar.addEventListener('mouseleave', () => {
+            main.style.marginLeft = '4rem'; // sidebar kecil
+        });
+    </script>
 
 </body>
 
