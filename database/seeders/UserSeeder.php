@@ -13,18 +13,13 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-      
-    {
-        User::create([
-            'name' => 'Operator Sekolah',
-            'email' => 'adminin@gmail.com',
-            'password' => Hash::make('admin123'),
-           
-        ]);
+    { {
+            User::create([
+                'name' => 'Operator Sekolah',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('admin123'),
 
-       
-    }
-
+            ]);
+        }
     }
 }

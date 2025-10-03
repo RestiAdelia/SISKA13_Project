@@ -29,8 +29,9 @@
                     <li class="nav-item"><a class="nav-link" href="#staf-guru">Staf & Guru</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                   <li class="nav-item">  <a class="nav-link text-indigo-700 hover:text-indigo-900 font-semibold" href="{{ route('login') }}">
-                      Login </a></li> 
+                    <li class="nav-item"> <a class="nav-link text-indigo-700 hover:text-indigo-900 font-semibold"
+                            href="{{ route('login') }}">
+                            Login </a></li>
 
                 </ul>
             </div>
@@ -45,29 +46,60 @@
 
         </div>
     </section>
-    <!-- Visi & Misi -->
-    <section id="visi-misi" class="py-5 bg-section-light">
+
+    <section id="visi-misi" class="py-5" style="background-color: var(--light);">
         <div class="container">
-            <h2 class="text-center section-title">Visi & Misi</h2>
+            <!-- Judul -->
+            <div class="text-align mb-5">
+                <h2 class="fw-bold" style="color: var(--dark2);">
+                    Visi & Misi
+                </h2>
+                <div
+                    style="width: 80px; height: 4px; background-color: var(--dark3); margin: 10px auto; border-radius: 5px;">
+                </div>
+            </div>
+
+            <!-- Identitas Sekolah -->
+            <div class="text-center mb-5">
+                <h5 style="color: var(--dark2); font-weight: 600;">
+                    {{ $visimisi ? $visimisi->nama_sekolah : 'Nama Sekolah Belum Tersedia' }}
+                </h5>
+                <h6 style="color: var(--dark3);">
+                    Akreditasi: {{ $visimisi ? $visimisi->akreditasi : '-' }}
+                </h6>
+            </div>
+
             <div class="row g-4">
+                <!-- Visi -->
                 <div class="col-md-6">
-                    <div class="p-4 bg-white rounded-4 shadow-sm h-100">
-                        <h4 class="mb-3"><i class="bi bi-lightbulb-fill text-secondary me-2"></i><b>Visi</b></h4>
-                        <p>"Terwujudnya Generasi Beriman dan Bertaqwa, Berprestasi, Kreatif, Melestarikan Budaya,
-                            Peduli Lingkungan serta Mencerminkan Profile Pelajar Pancasila."</p>
+                    <div class="p-4 rounded-4 shadow-sm h-100"
+                        style="background-color: white; border-left: 6px solid var(--dark3);">
+                        <h4 class="mb-3 d-flex align-items-center" style="color: var(--dark1);">
+                            <i class="bi bi-lightbulb-fill me-2" style="color: var(--mid); font-size: 1.4rem;"></i>
+                            <b>Visi</b>
+                        </h4>
+                        <p class="fs-6" style="color: var(--gray); line-height: 1.7;">
+                            {{ $visimisi ? $visimisi->visi : 'Belum ada data visi' }}
+                        </p>
                     </div>
                 </div>
+
+                <!-- Misi -->
                 <div class="col-md-6">
-                    <div class="p-4 bg-white rounded-4 shadow-sm h-100">
-                        <h4 class="mb-3"><i class="bi bi-flag-fill text-secondary me-2"></i><b>Misi</b></h4>
-                        <ul>
-                            <li>Menanamkan Nilai nilai Religius dan Berakhlak Mulia.</li>
-                            <li>Meningkatkan Kualitas Pembelajaran untuk Prestasi Akadmik dan Non Akademik.</li>
-                            <li>Mendorong Kreatvitas dan Berfikir Kritis.</li>
-                            <li>Menumbuhkna Semangat Nasionalisme dan Cinta Tanah Air.</li>
-                            <li>Membangun Kemandirian dan Tanggung Jawab</li>
-                            <li>Mengembangkan Keterampilan Sosial dan Kerjasama</li>
-                            <li>Mengembngkan Wawasan Global dan Litersi Teknologi</li>
+                    <div class="p-4 rounded-4 shadow-sm h-100"
+                        style="background-color: white; border-left: 6px solid var(--mid);">
+                        <h4 class="mb-3 d-flex align-items-center" style="color: var(--dark1);">
+                            <i class="bi bi-flag-fill me-2" style="color: var(--dark3); font-size: 1.4rem;"></i>
+                            <b>Misi</b>
+                        </h4>
+                        <ul class="mb-0" style="color: var(--gray); padding-left: 1.2rem; line-height: 1.7;">
+                            @if ($visimisi && $visimisi->misi)
+                                @foreach (explode("\n", $visimisi->misi) as $point)
+                                    <li>{{ $point }}</li>
+                                @endforeach
+                            @else
+                                <li>Belum ada data misi</li>
+                            @endif
                         </ul>
                     </div>
                 </div>

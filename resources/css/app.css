@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tambahkan CSS variable custom di sini */
+:root {
+    --dark3: #2563eb; /* biru medium */
+    --dark2: #1d4ed8; /* biru lebih gelap saat hover */
+}

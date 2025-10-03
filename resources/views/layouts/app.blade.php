@@ -26,17 +26,17 @@
 
         <nav class="flex-1 px-2 space-y-2">
             <a href="{{ route('dashboard') }}"
-                class="flex items-center gap-2 px-3 py-2 rounded-md 
+                class="flex items-center gap-2 px-3 py-2 rounded-md
              {{ request()->routeIs('dashboard') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                 <i class="fa-solid fa-house"></i>
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity">Dashboard</span>
             </a>
 
-            <a href="{{ route('sekolah') }}"
-                class="flex items-center gap-2 px-3 py-2 rounded-md 
-             {{ request()->routeIs('sekolah') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+            <a href="{{ route('visi-misi.index') }}"
+                class="flex items-center gap-2 px-3 py-2 rounded-md
+   {{ request()->routeIs('visi-misi.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                 <i class="fa-solid fa-school"></i>
-                <span class="opacity-0 group-hover:opacity-100 transition-opacity">Profil Sekolah</span>
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity">Visi Misi</span>
             </a>
 
             <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
