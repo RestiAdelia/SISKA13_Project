@@ -1,44 +1,38 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use App\Models\User;
 
 // Landing Page
 Route::get('/', function () {
-
     return view('landing_page');
-
 });
 
-// Login Page
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-// Proses Login (dummy tanpa database)
-Route::post('/login', function (\Illuminate\Http\Request $request) {
-    $username = $request->username;
-    $password = $request->password;
-
-    // hardcode user (contoh saja)
-    if ($username === 'admin' && $password === '12345') {
-        session(['user' => $username]);
-        return redirect('/dashboard');
-    }
-
-    return back()->with('error', 'Username atau Password salah!');
-});
-
-// Dashboard setelah login
+// Dashboard
 Route::get('/dashboard', function () {
-    if (!session()->has('user')) {
-        return redirect('/login');
-    }
     return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Profile
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Logout
-Route::post('/logout', function () {
-    session()->forget('user');
-    return redirect('/');
-})->name('logout');
+// 🚀 Override Forgot Password
+Route::get('/forgot-password', function () {
+    $user = User::where('email', 'admin@gmail.com')->firstOrFail();
+    $token = Password::createToken($user);
+
+    return view('auth.reset-password', [
+        'request' => request(),
+        'token'   => $token,
+        'email'   => $user->email,
+    ]);
+})->name('password.request');
+
+// Taruh paling bawah baru load auth.php
+require __DIR__.'/auth.php';
