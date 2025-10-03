@@ -9,7 +9,6 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
-<<<<<<< HEAD
       safelist: [
         'bg-white/10',
         'backdrop-blur-lg',
@@ -26,8 +25,6 @@ export default {
     ],
 
 
-=======
->>>>>>> login-dashboard
     theme: {
         extend: {
             fontFamily: {
