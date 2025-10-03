@@ -29,11 +29,9 @@
                     <li class="nav-item"><a class="nav-link" href="#staf-guru">Staf & Guru</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                   <li class="nav-item">
-    <a class="nav-link text-indigo-700 hover:text-indigo-900 font-semibold" href="{{ route('login') }}">
-        Login
-    </a>
-</li>
+                   <li class="nav-item">  <a class="nav-link text-indigo-700 hover:text-indigo-900 font-semibold" href="{{ route('login') }}">
+                      Login </a></li> 
+
                 </ul>
             </div>
         </div>
