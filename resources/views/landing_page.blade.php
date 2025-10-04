@@ -14,7 +14,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('login') }}">
                 <span class="fs-4 fw-bold text-white">SDN 13</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -23,88 +23,98 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto fs-5">
-                    <li class="nav-item"><a class="nav-link" href="#visi-misi">Visi &
-                            Misi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kepsek">Kepala Sekolah</a></li>
                     <li class="nav-item"><a class="nav-link" href="#staf-guru">Staf & Guru</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                    <li class="nav-item"> <a class="nav-link text-indigo-700 hover:text-indigo-900 font-semibold"
-                            href="{{ route('login') }}">
-                            Login </a></li>
-
+                    <li class="nav-item"><a class="nav-link" href="#lokasi-kontak">Kontak</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="overlay"></div>
-        <div class="container hero-content">
-            <h1>Selamat Datang di SDN 13 Kampung Kandang</h1>
-            <p>Membangun generasi cerdas, berkarakter, dan berprestasi.</p>
+    <section class="hero position-relative d-flex align-items-center justify-content-center text-center text-white">
+        <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+        <div class="container hero-content position-relative">
+            <h1 class="display-4 fw-bold mb-3">
+                Selamat Datang di {{ $visimisi ? $visimisi->nama_sekolah : 'Sekolah Kami' }}
+            </h1>
+            <p style="font-style: italic">
+                "Membangun generasi cerdas, berkarakter, dan berprestasi."
+            </p>
 
         </div>
     </section>
 
-    <section id="visi-misi" class="py-5" style="background-color: var(--light);">
+
+    <section id="profile" class="py-5">
         <div class="container">
-            <!-- Judul -->
-            <div class="text-align mb-5">
-                <h2 class="fw-bold" style="color: var(--dark2);">
-                    Visi & Misi
-                </h2>
-                <div
-                    style="width: 80px; height: 4px; background-color: var(--dark3); margin: 10px auto; border-radius: 5px;">
-                </div>
-            </div>
+            <h2 class="section-title text-center" style="color: var(--dark2);">Profile Sekolah</h2>
+            <div class="row align-items-center g-4">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="p-4 rounded-4 shadow-sm"
+                            style="background-color: white; border-left: 6px solid var(--dark3);">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-award-fill me-3" style="color: var(--mid); font-size: 2rem;"></i>
+                                <h4 class="mb-0" style="color: var(--dark1); font-weight: 700;">
+                                    Akreditasi
+                                </h4>
+                            </div>
 
-            <!-- Identitas Sekolah -->
-            <div class="text-center mb-5">
-                <h5 style="color: var(--dark2); font-weight: 600;">
-                    {{ $visimisi ? $visimisi->nama_sekolah : 'Nama Sekolah Belum Tersedia' }}
-                </h5>
-                <h6 style="color: var(--dark3);">
-                    Akreditasi: {{ $visimisi ? $visimisi->akreditasi : '-' }}
-                </h6>
-            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3 fw-semibold" style="min-width: 50px; color: var(--gray);">
 
-            <div class="row g-4">
-                <!-- Visi -->
-                <div class="col-md-6">
-                    <div class="p-4 rounded-4 shadow-sm h-100"
-                        style="background-color: white; border-left: 6px solid var(--dark3);">
-                        <h4 class="mb-3 d-flex align-items-center" style="color: var(--dark1);">
-                            <i class="bi bi-lightbulb-fill me-2" style="color: var(--mid); font-size: 1.4rem;"></i>
-                            <b>Visi</b>
-                        </h4>
-                        <p class="fs-6" style="color: var(--gray); line-height: 1.7;">
-                            {{ $visimisi ? $visimisi->visi : 'Belum ada data visi' }}
-                        </p>
+                                </div>
+                                <div class="d-inline-flex align-items-center justify-content-center fw-bold fs-5 rounded-circle"
+                                    style="width: 60px; height: 60px; border: 3px solid var(--dark3); color: var(--dark3);">
+                                    {{ $visimisi ? $visimisi->akreditasi : '-' }}
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Visi -->
+                        <div class="col-md-6">
+                            <div class="p-4 rounded-4 shadow-sm h-100"
+                                style="background-color: white; border-left: 6px solid var(--dark3);">
+                                <h4 class="mb-3 d-flex align-items-center" style="color: var(--dark1);">
+                                    <i class="bi bi-lightbulb-fill me-2"
+                                        style="color: var(--mid); font-size: 1.4rem;"></i>
+                                    <b>Visi</b>
+                                </h4>
+                                <p class="fs-6" style="color: var(--gray); line-height: 1.7;">
+                                    {{ $visimisi ? $visimisi->visi : 'Belum ada data visi' }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Misi -->
+                        <div class="col-md-6">
+                            <div class="p-4 rounded-4 shadow-sm h-100"
+                                style="background-color: white; border-left: 6px solid var(--mid);">
+                                <h4 class="mb-3 d-flex align-items-center" style="color: var(--dark1);">
+                                    <i class="bi bi-flag-fill me-2" style="color: var(--dark3); font-size: 1.4rem;"></i>
+                                    <b>Misi</b>
+                                </h4>
+                                <ul class="mb-0" style="color: var(--gray); padding-left: 1.2rem; line-height: 1.7;">
+                                    @if ($visimisi && $visimisi->misi)
+                                        @foreach (explode("\n", $visimisi->misi) as $point)
+                                            <li>{{ $point }}</li>
+                                        @endforeach
+                                    @else
+                                        <li>Belum ada data misi</li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                <!-- Misi -->
-                <div class="col-md-6">
-                    <div class="p-4 rounded-4 shadow-sm h-100"
-                        style="background-color: white; border-left: 6px solid var(--mid);">
-                        <h4 class="mb-3 d-flex align-items-center" style="color: var(--dark1);">
-                            <i class="bi bi-flag-fill me-2" style="color: var(--dark3); font-size: 1.4rem;"></i>
-                            <b>Misi</b>
-                        </h4>
-                        <ul class="mb-0" style="color: var(--gray); padding-left: 1.2rem; line-height: 1.7;">
-                            @if ($visimisi && $visimisi->misi)
-                                @foreach (explode("\n", $visimisi->misi) as $point)
-                                    <li>{{ $point }}</li>
-                                @endforeach
-                            @else
-                                <li>Belum ada data misi</li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Kepala Sekolah -->
@@ -219,6 +229,35 @@
             </div>
         </div>
     </section>
+    <section class="mt-5 py-5" style="background-color: var(--light);" id="ekstrakurikuler">
+        <div class="container ">
+            <h3 class="section-title text-center mb-5" style="color: var(--dark2);">
+                Ekstrakurikuler
+            </h3>
+
+            <div class="row justify g-4">
+                <!-- Olahraga -->
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="ekskul-item position-relative mx-auto">
+                        <div class="circle">
+                            <img src="{{ asset('images/olahraga.png') }}" alt="Olahraga" class="ekskul-logo" />
+                        </div>
+                        <div class="bubble">Olahraga</div>
+                    </div>
+                </div>
+
+                <!-- Pramuka -->
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="ekskul-item position-relative mx-auto">
+                        <div class="circle">
+                            <img src="{{ asset('images/pramuka.png') }}" alt="Pramuka" class="ekskul-logo" />
+                        </div>
+                        <div class="bubble">Pramuka</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="lokasi-kontak" class="py-5 bg-section-light">
         <div class="container">
             <h2 class="section-title text-center mb-4">Lokasi & Kontak</h2>
@@ -228,7 +267,7 @@
                     <div class="col-lg-6 d-flex">
                         <div class="map-container flex-fill overflow-hidden rounded-3">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3971.42!2d100.159629265868!3d-0.6183968915705369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1726839400000!5m2!1sid!2sid"
+                                src="https://www.google.com/maps?q=-0.618343250515486,100.15961853703192&hl=id&z=16&output=embed"
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
@@ -267,7 +306,7 @@
             <div class="row gy-4">
                 <!-- Logo & Deskripsi -->
                 <div class="col-md-3">
-                    <h4 class="fw-bold mb-3">SDN 13 Kampung Kandang</h4>
+                    <h4 class="fw-bold mb-3"i>{{ $visimisi ? $visimisi->nama_sekolah : ' ' }}</h4>
                     <p class="small">
                         Berkomitmen melahirkan generasi beriman,
                         kreatif, peduli, dan mencerminkan Profil Pelajar Pancasila
@@ -286,10 +325,10 @@
                 <div class="col-md-3">
                     <h5 class="fw-bold mb-3">Navigasi</h5>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="#beranda">Beranda</a></li>
-                        <li><a href="#profil">Profil Sekolah</a></li>
-                        <li><a href="#guru">Daftar Guru</a></li>
+                        <li><a href="#profile">Profil Sekolah</a></li>
+                        <li><a href="#staf-guru">Daftar Guru</a></li>
                         <li><a href="#kegiatan">Kegiatan</a></li>
+                        <li><a href="#lokasi-kontak">Kontak</a></li>
                     </ul>
                 </div>
 
@@ -297,7 +336,7 @@
                 <div class="col-md-3">
                     <h5 class="fw-bold mb-3">Program</h5>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="#">Ekstrakurikuler</a></li>
+                        <li><a href="#ekstrakurikuler">Ekstrakurikuler</a></li>
                         <li><a href="#">Prestasi</a></li>
                         <li><a href="#">MoU & Kerjasama</a></li>
                     </ul>
@@ -306,7 +345,8 @@
                 <!-- Kontak -->
                 <div class="col-md-3">
                     <h5 class="fw-bold mb-3">Kontak</h5>
-                    <p class="mb-2"><i class="bi bi-geo-alt-fill me-2"></i>Kp. Kandang, Kec. Pariaman Timur, Kota
+                    <p class="mb-2"><i class="bi bi-geo-alt-fill me-2"></i>Kp. Kandang, Kec. Pariaman Timur,
+                        Kota
                         Pariaman, Sumatera Barat 25534</p>
                     <p class="mb-0"><i class="bi bi-globe me-2 text-white"></i>info@sekolahku.sch.id</p>
                     <p class="mb-0"><i class="bi bi-envelope-fill me-2"></i>sdn13kpkd.@gmail.com</p>
@@ -318,7 +358,7 @@
 
             <!-- Copyright -->
             <div class="text-center small">
-                &copy; {{ date('Y') }} SDN 13 Kampung Kandang. All Rights Reserved.
+                &copy; {{ date('Y') }} {{ $visimisi ? $visimisi->nama_sekolah : ' ' }} <br> Rights Reserved. Masih dalam pengembangan</br>
             </div>
         </div>
     </footer>

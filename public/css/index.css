@@ -184,6 +184,62 @@
             transform: scale(1.05);
         }
 
+  .circle {
+    width: 90px;
+    height: 90px;
+    border: 3px solid var(--dark3);
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ekskul-logo {
+    max-width: 60%;
+    max-height: 60%;
+    object-fit: contain;
+  }
+
+  /* Bubble Tooltip */
+  .bubble {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--dark3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .bubble::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: var(--dark3) transparent transparent transparent;
+  }
+
+  .ekskul-item:hover .bubble {
+    opacity: 1;
+  }
+
+  .ekskul-item:hover .circle {
+    background-color: var(--mid);
+    border-color: var(--dark2);
+  }
         /* Section Titles */
         .section-title {
             font-weight: 700;
