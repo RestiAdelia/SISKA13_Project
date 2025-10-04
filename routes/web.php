@@ -1,22 +1,21 @@
 <?php
 
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\VisiMisiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
 
 // Landing Page
-Route::get('/', function () {
-    return view('landing_page');
-});
-
+Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 // Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/sekolah', [SekolahController::class, 'index'])->name('sekolah');
+// Visi Misi
+Route::resource('visi-misi', VisiMisiController::class);
 
 // Profile
 Route::middleware('auth')->group(function () {
@@ -38,4 +37,4 @@ Route::get('/forgot-password', function () {
 })->name('password.request');
 
 // Taruh paling bawah baru load auth.php
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
