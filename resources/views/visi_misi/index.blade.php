@@ -5,6 +5,20 @@
         </h2>
     </x-slot>
 
+    <style>
+        .max-w-7xl {
+            max-width: 100% !important;
+        }
+
+        .grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .flex.flex-col.md\:flex-row.justify-between.items-start.md\:items-center.mb-8.gap-4>a[href*="visi-misi/create"] {
+            display: none !important;
+        }
+    </style>
+
     <div class="py-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
@@ -161,7 +175,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 4v16m8-8H4" />
                                     </svg>
-                                    Tambah Data Pertama
+                                    Tambahkan Data
                                 </a>
                             </div>
                         </div>
