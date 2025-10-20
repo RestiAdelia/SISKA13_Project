@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VisiMisiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 // Landing Page
@@ -35,6 +37,19 @@ Route::get('/forgot-password', function () {
         'email'   => $user->email,
     ]);
 })->name('password.request');
+
+Route::post('/logout', function (Request $request) {
+    Auth::guard('web')->logout();
+
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect('/');
+})->name('logout');
+
+//lihat profile
+Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.show');
+
 
 // Taruh paling bawah baru load auth.php
 require __DIR__ . '/auth.php';
