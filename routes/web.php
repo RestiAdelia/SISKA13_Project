@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VisiMisiController;
@@ -15,7 +16,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Visi Misi
-Route::resource('visi-misi', VisiMisiController::class);
+Route::resource('visi-misi', VisiMisiController::class)
+    ->middleware(['auth']);
+
+Route::resource('kegiatan', KegiatanController::class)
+    ->middleware(['auth']);
+
+Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
 
 // Profile
 Route::middleware('auth')->group(function () {
