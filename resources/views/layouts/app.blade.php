@@ -51,10 +51,15 @@
                 <i class="fa-solid fa-book"></i>
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Kelas</span>
             </a>
-            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
+
+            <a href="{{ route('kegiatan.index') }}"
+                class="flex items-center gap-3 px-3 py-2 rounded-md
+    {{ request()->routeIs('kegiatan.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Kegiatan</span>
             </a>
+
+
             <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
                 <i class="fa-solid fa-pen-to-square"></i>
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Rekap Absen</span>
