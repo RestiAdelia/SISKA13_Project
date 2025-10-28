@@ -7,6 +7,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
 
 </head>
 
@@ -37,16 +39,18 @@
    {{ request()->routeIs('visi-misi.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                 <i class="fa-solid fa-school"></i>
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity">Visi Misi</span>
+                <a href="{{ route('guru_dan_staff.index') }}"
+                    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20 group">
+                    <i class="fa-solid fa-chalkboard-teacher"></i>
+                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Data Guru & Staff</span>
+                </a>
             </a>
 
             <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
                 <i class="fa-solid fa-user-graduate"></i>
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Data Siswa</span>
             </a>
-            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
-                <i class="fa-solid fa-chalkboard-teacher"></i>
-                <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Data Guru</span>
-            </a>
+
             <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
                 <i class="fa-solid fa-book"></i>
                 <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Kelas</span>
@@ -73,11 +77,7 @@
         <header class="flex items-center justify-between bg-white px-6 py-3 shadow">
             <h1 class="font-bold text-lg">Dashboard</h1>
             <div class="flex items-center space-x-4">
-                <!-- Search -->
-                <div>
-                    <input type="text" placeholder="Cari data..."
-                        class="px-3 py-2 border rounded-md w-64 focus:outline-none focus:ring focus:ring-pink-300">
-                </div>
+
                 <!-- User Dropdown -->
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex items-center space-x-2 focus:outline-none">
