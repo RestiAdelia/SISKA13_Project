@@ -13,10 +13,8 @@
                 @include('profile.partials.update-profile-information-form')
             </div>
 
-            {{-- Update Password --}}
-            <div class="p-6 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                @include('profile.partials.update-password-form')
-            </div>
+           
+
 
         </div>
     </div>

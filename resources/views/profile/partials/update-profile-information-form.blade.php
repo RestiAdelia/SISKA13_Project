@@ -1,4 +1,3 @@
-
 <section>
     <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
         @csrf
@@ -102,6 +101,14 @@
                         class="bg-[#820642] hover:bg-[#b94e81] text-white font-semibold px-6 py-2.5 rounded-lg shadow transition">
                         <i class="fa-solid fa-floppy-disk mr-2"></i> Save
                     </button>
+                </div>
+
+                {{-- Tombol Ganti Password via OTP --}}
+                <div class="flex justify-end mt-4">
+                    <a href="{{ route('password.requestOtpForm') }}"
+                        class="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-2.5 rounded-lg shadow transition">
+                        <i class="fa-solid fa-key mr-2"></i> Ganti Password (Verifikasi Email)
+                    </a>
                 </div>
             </div>
         </div>
