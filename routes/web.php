@@ -16,13 +16,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Visi Misi
-Route::resource('visi-misi', VisiMisiController::class)
-    ->middleware(['auth']);
+Route::middleware(['auth'])->group(function () {
 
-Route::resource('kegiatan', KegiatanController::class)
-    ->middleware(['auth']);
+    Route::resource('visi-misi', VisiMisiController::class);
+});
 
-Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
+
 
 // Profile
 Route::middleware('auth')->group(function () {
@@ -45,3 +44,10 @@ Route::get('/forgot-password', function () {
 
 // Taruh paling bawah baru load auth.php
 require __DIR__ . '/auth.php';
+
+//start guru dan staff
+use App\Http\Controllers\GuruDanStaffController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('guru_dan_staff', GuruDanStaffController::class);
+});
