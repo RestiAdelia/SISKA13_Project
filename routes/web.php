@@ -15,7 +15,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Visi Misi
+
 Route::resource('visi-misi', VisiMisiController::class)
     ->middleware(['auth']);
 
