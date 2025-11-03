@@ -1,6 +1,4 @@
-
 <x-app-layout>
-
     <x-slot name="header">
         <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
             {{ __('Data Guru dan Staff') }}
@@ -8,35 +6,28 @@
     </x-slot>
 
     <div class="p-6 bg-gray-50 min-h-screen" x-data="{ search: '' }">
-        <div>
-            {{-- Judul di tengah --}}
-            <div class="text-center">
-                <h2 class="font-bold text-3xl text-black border-b-4 border-pink-700 pb-1 inline-block">
+
+        <div class="mb-10">
+            <div class="text-center mb-10">
+                <h2 class="font-bold text-3xl text-black border-b-2 border-pink-600 pb-3 **w-1/2** **mx-auto**">
                     Data Guru dan Staf
                 </h2>
             </div>
-
-
         </div>
-
-        {{-- Ganti seluruh blok Baris Search dan Tombol Tambah yang sudah ada dengan kode ini --}}
 
         <div class="flex items-center justify-between mb-6 gap-3">
 
-            {{-- Input Search (KIRI) --}}
+            {{-- Input Search --}}
             <div class="flex-1 max-w-md w-full">
                 <input type="text" x-model="search" placeholder="🔍 Cari nama, NIP, atau jabatan..."
                     class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700">
             </div>
-
-            {{-- Tombol Tambah (KANAN) --}}
-            <div class="flex-shrink-0">
-                <a href="{{ route('guru_dan_staff.create') }}"
-                    class="px-5 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition whitespace-nowrap">
-                    + Tambah Data
+            <div>
+                <a href=""{{ route('guru_dan_staff.create') }}"
+                    class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:scale-105">
+                    ➕ Tambah Data
                 </a>
             </div>
-
         </div>
 
         {{-- TABEL DATA --}}
@@ -87,18 +78,16 @@
                                     class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition inline-flex items-center gap-1">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-
-                                {{-- Tombol Hapus --}}
                                 <form action="{{ route('guru_dan_staff.destroy', $pegawai->id) }}" method="POST"
-                                    onsubmit="return confirm('Yakin ingin menghapus data ini?');" class="inline-block">
+                                    class="delete-form inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
-                                        class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition inline-flex items-center gap-1">
+                                    <button type="button"
+                                        class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition inline-flex items-center gap-1 btn-delete">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
-
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -109,8 +98,5 @@
             </table>
         </div>
 
-    </div>
-
-    {{-- Alpine.js --}}
-    <script src="//unpkg.com/alpinejs" defer></script>
+        <script src="//unpkg.com/alpinejs" defer></script>
 </x-app-layout>

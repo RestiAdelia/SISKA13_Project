@@ -8,40 +8,53 @@
     <div class="py-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Header Section -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-800">Manajemen Kegiatan Sekolah</h1>
-                    <p class="text-gray-600 mt-1">Kelola daftar kegiatan sekolah Anda</p>
+            <div class="mb-8">
+                <div class="text-center mb-10">
+                    <h2 class="font-bold text-3xl text-black border-b-2 border-pink-600 pb-3 **w-1/2** **mx-auto**">
+                       Kegiatan Sekolah
+                    </h2>
                 </div>
-                <a href="{{ route('kegiatan.create') }}"
-                    class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:scale-105">
-                    ➕ Tambah Kegiatan
-                </a>
+
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+
+                    <div class="md:w-3/4">
+                        {{-- //tambahkan serch --}}
+                    </div>
+
+                    <a href="{{ route('kegiatan.create') }}"
+                        class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:scale-105 flex-shrink-0">
+                        ➕ Tambah Kegiatan
+                    </a>
+                </div>
             </div>
 
-            <!-- Table Section -->
-            <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-                <table class="min-w-full table-auto border-collapse">
+            <div class="bg-white shadow-lg rounded-xl **overflow-x-auto**">
+
+                <table class="**min-w-full table-fixed** border-collapse">
                     <thead class="bg-gray-100 border-b">
                         <tr>
-                            <th class="px-6 py-4 text-left text-gray-600 font-semibold">No</th>
-                            <th class="px-6 py-4 text-left text-gray-600 font-semibold">Nama Kegiatan</th>
-                            <th class="px-6 py-4 text-left text-gray-600 font-semibold">Tanggal</th>
-                            <th class="px-6 py-4 text-left text-gray-600 font-semibold">Deskripsi</th>
-                            <th class="px-6 py-4 text-left text-gray-600 font-semibold">Gambar</th>
-                            <th class="px-6 py-4 text-center text-gray-600 font-semibold">Aksi</th>
+                            <th class="px-6 py-4 text-left text-gray-600 font-semibold w-12">No</th>
+                            <th class="px-6 py-4 text-left text-gray-600 font-semibold w-56">Nama Kegiatan</th>
+                            <th class="px-6 py-4 text-left text-gray-600 font-semibold w-40">Tanggal</th>
+                            <th class="px-6 py-4 text-left text-gray-600 font-semibold w-64 min-w-[20rem]">Deskripsi
+                            </th>
+                            <th class="px-6 py-4 text-left text-gray-600 font-semibold w-32">Gambar</th>
+                            <th class="px-6 py-4 text-center text-gray-600 font-semibold w-48">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($kegiatan as $index => $item)
                             <tr class="border-b hover:bg-gray-50 transition">
                                 <td class="px-6 py-4 text-gray-800">{{ $index + 1 }}</td>
-                                <td class="px-6 py-4 font-medium text-gray-900">{{ $item->nama_kegiatan }}</td>
+                                <td class="px-6 py-4 font-medium text-gray-900 overflow-hidden text-ellipsis">
+                                    {{ $item->nama_kegiatan }}</td>
                                 <td class="px-6 py-4 text-gray-700">
                                     {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->translatedFormat('d F Y') }}
                                 </td>
-                                <td class="px-6 py-4 text-gray-700 max-w-sm truncate">{{ $item->deskripsi }}</td>
+                                <td
+                                    class="px-6 py-4 text-gray-700 **whitespace-normal break-words** max-w-full text-clip overflow-hidden">
+                                    {{ $item->deskripsi }}
+                                </td>
                                 <td class="px-6 py-4">
                                     @if ($item->gambar_kegiatan)
                                         <img src="{{ asset('storage/' . $item->gambar_kegiatan) }}"
@@ -77,7 +90,6 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Pagination -->
             @if ($kegiatan->hasPages())
                 <div class="p-6 border-t bg-gray-50 flex justify-center">
                     {{ $kegiatan->links() }}
@@ -85,34 +97,5 @@
             @endif
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const deleteButtons = document.querySelectorAll('.btn-delete');
-
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const form = this.closest('.delete-form');
-
-                    Swal.fire({
-                        title: 'Yakin ingin menghapus?',
-                        text: "Data kegiatan ini akan dihapus permanen!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Ya, hapus!',
-                        cancelButtonText: 'Batal'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
-                        }
-                    });
-                });
-            });
-        });
-    </script>
 
 </x-app-layout>

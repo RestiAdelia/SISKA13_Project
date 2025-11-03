@@ -24,47 +24,59 @@
                 </span>
             </div>
 
-            <nav class="flex-1 px-2 space-y-2">
+            <nav class="flex-1 px-2 py-2 space-y-2 overflow-y-auto">
+
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center gap-2 px-3 py-2 rounded-md
-                {{ request()->routeIs('dashboard') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity">Dashboard</span>
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+        {{ request()->routeIs('dashboard') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                    <i class="fa-solid fa-house w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Dashboard</span>
                 </a>
 
                 <a href="{{ route('visi-misi.index') }}"
-                    class="flex items-center gap-2 px-3 py-2 rounded-md
-    {{ request()->routeIs('visi-misi.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
-                    <i class="fa-solid fa-school"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity">Visi Misi</span>
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+        {{ request()->routeIs('visi-misi.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                    <i class="fa-solid fa-school w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Visi Misi</span>
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Data Siswa</span>
+                <a href="{{ route('guru_dan_staff.index') }}"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+        {{ request()->routeIs('guru_dan_staff.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                    <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Data Guru & Staf</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
-                    <i class="fa-solid fa-chalkboard-teacher"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Data Guru</span>
+
+                <a href="#"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
+                    <i class="fa-solid fa-user-graduate w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Data Siswa</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Kelas</span>
+
+                <a href="#"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
+                    <i class="fa-solid fa-book w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Kelas</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Kegiatan</span>
+                <a href="{{ route('kegiatan.index') }}"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+                    {{ request()->routeIs('kegiatan.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                    <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Kegiatan</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">Rekap Absen</span>
+                
+
+                <a href="#"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
+                    <i class="fa-solid fa-pen-to-square w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Rekap Absen</span>
                 </a>
-                <a href="{{ route('profile.edit') }}"
-                    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/20 transition duration-300">
-                    <i class="fa-solid fa-gear"></i>
-                    <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Pengaturan
-                    </span>
+
+                <a href="{{ route('profile.show') }}"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
+                     {{ request()->routeIs('profile.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                    <i class="fa-solid fa-gear w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Pengaturan</span>
                 </a>
 
             </nav>
@@ -133,5 +145,5 @@
             </main>
         </div>
     </body>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </html>
