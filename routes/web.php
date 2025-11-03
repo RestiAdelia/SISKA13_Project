@@ -18,7 +18,13 @@ Route::get('/dashboard', function () {
 // Visi Misi
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('visi-misi', VisiMisiController::class);
+    Route::resource('visi-misi', VisiMisiController::class)
+        ->middleware(['auth']);
+
+Route::resource('kegiatan', KegiatanController::class)
+    ->middleware(['auth']);
+
+    Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
 });
 
 

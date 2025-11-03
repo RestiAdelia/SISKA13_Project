@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-bold text-3xl text-gray-800 leading-tight">
-                Detail Guru / Staff
+                Detail Guru / Staf
             </h2>
             <a href="{{ route('guru_dan_staff.index') }}"
                 class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition">

@@ -1,4 +1,4 @@
-{{-- filepath: resources/views/guru_dan_staff/index.blade.php --}}
+
 <x-app-layout>
 
     <x-slot name="header">
@@ -12,7 +12,7 @@
             {{-- Judul di tengah --}}
             <div class="text-center">
                 <h2 class="font-bold text-3xl text-black border-b-4 border-pink-700 pb-1 inline-block">
-                    Data Guru dan Staff
+                    Data Guru dan Staf
                 </h2>
             </div>
 

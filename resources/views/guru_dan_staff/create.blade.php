@@ -1,4 +1,4 @@
-{{-- filepath: d:\KULIAH\Semester 5\Project Utama\SISKA13_Project\resources\views\guru_dan_staff\create.blade.php --}}
+
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -15,7 +15,7 @@
     <div class="bg-gray-50 min-h-screen py-10">
         <div class="max-w-5xl mx-auto bg-white shadow-md rounded-lg p-8">
             <h3 class="text-xl font-semibold text-gray-800 mb-6 border-b pb-3">
-                Formulir Tambah Guru / Staff
+                Formulir Tambah Guru / Staf
             </h3>
 
             <form action="{{ route('guru_dan_staff.store') }}" method="POST" enctype="multipart/form-data"

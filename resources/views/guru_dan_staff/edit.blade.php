@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="container mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6">Edit Guru / Staff</h2>
+        <h2 class="text-2xl font-bold mb-6">Edit Guru / Staf</h2>
 
         <form action="{{ route('guru_dan_staff.update', $item->id) }}" method="POST" enctype="multipart/form-data"
             class="bg-white p-6 rounded shadow-md space-y-4">
