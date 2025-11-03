@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VisiMisiController;
@@ -18,7 +19,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Visi Misi
-Route::resource('visi-misi', VisiMisiController::class);
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('visi-misi', VisiMisiController::class);
+});
+
+
 
 // Profile
 Route::middleware('auth')->group(function () {
@@ -67,3 +73,10 @@ Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.s
 
 // Taruh paling bawah baru load auth.php
 require __DIR__ . '/auth.php';
+
+//start guru dan staff
+use App\Http\Controllers\GuruDanStaffController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('guru_dan_staff', GuruDanStaffController::class);
+});

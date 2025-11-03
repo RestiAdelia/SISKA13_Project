@@ -191,44 +191,41 @@
             </div>
         </div>
     </section>
+
     <!-- Kegiatan -->
     <section id="kegiatan" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center section-title mb-5">Kegiatan Sekolah</h2>
+
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <img src="https://i.pinimg.com/1200x/37/9a/73/379a736154fca561015f51782ec9bc36.jpg"
-                            alt="Kegiatan 1" class="card-img-top" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kegiatan 1</h5>
-                            <p class="card-text">Deskripsi singkat tentang kegiatan sekolah 1.</p>
-                        </div>
+                @forelse ($kegiatan as $item)
+                    <div class="col-md-4">
+                        <!-- Bungkus card dengan link -->
+                        <a href="{{ route('kegiatan.show', $item->id) }}" class="text-decoration-none text-dark">
+                            <div class="card h-100 shadow-sm hover:shadow-lg transition">
+                                <img src="{{ asset('storage/' . $item->gambar_kegiatan) }}"
+                                    alt="{{ $item->nama_kegiatan }}" class="card-img-top"
+                                    style="height: 250px; object-fit: cover;" />
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $item->nama_kegiatan }}</h5>
+                                    <p class="card-text">
+                                        <strong>Tanggal:</strong>
+                                        {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->translatedFormat('d F Y') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <img src="https://i.pinimg.com/1200x/37/9a/73/379a736154fca561015f51782ec9bc36.jpg"
-                            alt="Kegiatan 2" class="card-img-top" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kegiatan 2</h5>
-                            <p class="card-text">Deskripsi singkat tentang kegiatan sekolah 2.</p>
-                        </div>
+                @empty
+                    <div class="col-12 text-center">
+                        <p class="text-muted">Belum ada kegiatan yang ditambahkan.</p>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <img src="https://i.pinimg.com/1200x/37/9a/73/379a736154fca561015f51782ec9bc36.jpg"
-                            alt="Kegiatan 3" class="card-img-top" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kegiatan 3</h5>
-                            <p class="card-text">Deskripsi singkat tentang kegiatan sekolah 3.</p>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
+
+
     <section class="mt-5 py-5" style="background-color: var(--light);" id="ekstrakurikuler">
         <div class="container ">
             <h3 class="section-title text-center mb-5" style="color: var(--dark2);">
@@ -358,7 +355,8 @@
 
             <!-- Copyright -->
             <div class="text-center small">
-                &copy; {{ date('Y') }} {{ $visimisi ? $visimisi->nama_sekolah : ' ' }} <br> Rights Reserved. Masih dalam pengembangan</br>
+                &copy; {{ date('Y') }} {{ $visimisi ? $visimisi->nama_sekolah : ' ' }} <br> Rights Reserved. Masih
+                dalam pengembangan</br>
             </div>
         </div>
     </footer>
