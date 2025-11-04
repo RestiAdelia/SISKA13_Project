@@ -4,6 +4,8 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VisiMisiController;
+use App\Http\Controllers\GuruDanStaffController;
+use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
@@ -51,7 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/password/update', [OTPController::class, 'updatePassword'])->name('password.updatePassword');
 });
 
-
 // 🚀 Override Forgot Password
 Route::get('/forgot-password', function () {
     $user = User::where('email', 'admin@gmail.com')->firstOrFail();
@@ -81,8 +82,9 @@ Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.s
 require __DIR__ . '/auth.php';
 
 //start guru dan staff
-use App\Http\Controllers\GuruDanStaffController;
+
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('guru_dan_staff', GuruDanStaffController::class);
+    Route::resource('kelas', KelasController::class);
 });
