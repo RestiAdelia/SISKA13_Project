@@ -1,10 +1,12 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
-            {{ __('Detail Kegiatan') }}
-        </h2>
-    </x-slot>
+@extends('layouts.public')
 
+@section('header')
+    <h2 class="font-bold text-3xl text-gray-800 leading-tight">
+        {{ __('Detail Kegiatan') }}
+    </h2>
+@endsection
+
+@section('content')
     <div class="py-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
         <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
             <!-- Gambar -->
@@ -36,4 +38,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

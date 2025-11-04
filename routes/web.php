@@ -13,22 +13,19 @@ use App\Http\Controllers\Auth\OTPController;
 
 // Landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
+
+// Detail Kegiatan - Bisa diakses umum tanpa login
+Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
+
 // Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Visi Misi
-Route::middleware(['auth'])->group(function () {
-
-    Route::resource('visi-misi', VisiMisiController::class)
-        ->middleware(['auth']);
-
-Route::resource('kegiatan', KegiatanController::class)
+Route::resource('visi-misi', VisiMisiController::class)
     ->middleware(['auth']);
 
-    Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
-});
+
 
 
 
