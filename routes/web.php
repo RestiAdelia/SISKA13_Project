@@ -16,7 +16,9 @@ Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
 // Detail Kegiatan - Bisa diakses umum tanpa login
 Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
-
+//Resource route untuk kegiatan (create, edit, update, delete) - Butuh login
+Route::resource('kegiatan', KegiatanController::class)
+    ->middleware(['auth']);
 // Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -24,10 +26,6 @@ Route::get('/dashboard', function () {
 
 Route::resource('visi-misi', VisiMisiController::class)
     ->middleware(['auth']);
-
-
-
-
 
 // Profile
 Route::middleware('auth')->group(function () {

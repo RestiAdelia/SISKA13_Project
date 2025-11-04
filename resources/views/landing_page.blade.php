@@ -201,7 +201,7 @@
                 @forelse ($kegiatan as $item)
                     <div class="col-md-4">
                         <!-- Bungkus card dengan link -->
-                        <a href="{{'#'}}" class="text-decoration-none text-dark">
+                         <a href="{{ route('kegiatan.show', $item->id) }}" class="text-decoration-none text-dark">
                             <div class="card h-100 shadow-sm hover:shadow-lg transition">
                                 <img src="{{ asset('storage/' . $item->gambar_kegiatan) }}"
                                     alt="{{ $item->nama_kegiatan }}" class="card-img-top"
