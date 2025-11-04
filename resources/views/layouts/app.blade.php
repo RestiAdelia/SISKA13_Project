@@ -7,6 +7,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     </head>
 
@@ -53,8 +54,9 @@
                     <span class="whitespace-nowrap hidden md:group-hover:block">Data Siswa</span>
                 </a>
 
-                <a href="#"
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
+                <a href="{{ route('kelas.index') }}"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
+                      {{ request()->routeIs('kelas.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                     <i class="fa-solid fa-book w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Kelas</span>
                 </a>
@@ -110,7 +112,7 @@
                             </svg>
                         </button>
 
-                        <!-- Dropdown Menu -->
+                     
                         <!-- Dropdown Menu -->
                         <div x-show="open" @click.outside="open = false"
                             class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border py-2 z-50">
