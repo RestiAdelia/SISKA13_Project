@@ -129,7 +129,7 @@
 
                 <!-- Teks di kanan -->
                 <div class="col-lg-8">
-                    <h4 class="kepsek-nama">Ibu Devina Herianti, S.Pd.GSD</h4>
+                    <h4 class="kepsek-nama">Ibu Devina Heriyanti, S.Pd.GSD</h4>
                     <p class="kepsek-jabatan">Kepala Sekolah</p>
                     <blockquote class="kepsek-quote">
                         "Mari Wujudkan Generasi Beriman, Kreatif, dan Cinta Budaya!"
@@ -201,7 +201,7 @@
                 @forelse ($kegiatan as $item)
                     <div class="col-md-4">
                         <!-- Bungkus card dengan link -->
-                        <a href="{{ route('kegiatan.show', $item->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{'#'}}" class="text-decoration-none text-dark">
                             <div class="card h-100 shadow-sm hover:shadow-lg transition">
                                 <img src="{{ asset('storage/' . $item->gambar_kegiatan) }}"
                                     alt="{{ $item->nama_kegiatan }}" class="card-img-top"
@@ -302,7 +302,7 @@
         <div class="container">
             <div class="row gy-4">
                 <!-- Logo & Deskripsi -->
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h4 class="fw-bold mb-3"i>{{ $visimisi ? $visimisi->nama_sekolah : ' ' }}</h4>
                     <p class="small">
                         Berkomitmen melahirkan generasi beriman,
@@ -319,7 +319,7 @@
                     </div>
                 </div>
                 <!-- Navigasi -->
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h5 class="fw-bold mb-3">Navigasi</h5>
                     <ul class="list-unstyled footer-links">
                         <li><a href="#profile">Profil Sekolah</a></li>
@@ -330,7 +330,7 @@
                 </div>
 
                 <!-- Layanan / Program -->
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <h5 class="fw-bold mb-3">Program</h5>
                     <ul class="list-unstyled footer-links">
                         <li><a href="#ekstrakurikuler">Ekstrakurikuler</a></li>
@@ -340,13 +340,13 @@
                 </div>
 
                 <!-- Kontak -->
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <h5 class="fw-bold mb-3">Kontak</h5>
                     <p class="mb-2"><i class="bi bi-geo-alt-fill me-2"></i>Kp. Kandang, Kec. Pariaman Timur,
                         Kota
                         Pariaman, Sumatera Barat 25534</p>
                     <p class="mb-0"><i class="bi bi-globe me-2 text-white"></i>info@sekolahku.sch.id</p>
-                    <p class="mb-0"><i class="bi bi-envelope-fill me-2"></i>sdn13kpkd.@gmail.com</p>
+                    <p class="mb-0"><i class="bi bi-envelope-fill me-2"></i>sdn13_kampungkandang@yhoo.com</p>
 
                 </div>
             </div>

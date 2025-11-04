@@ -6,7 +6,7 @@
         <p><strong>Alamat:</strong> {{ $data['alamat'] }}</p>
         <p><strong>Telepon:</strong> {{ $data['telepon'] }}</p>
         <p><strong>Email:</strong> {{ $data['email'] }}</p>
-
+        
         <div class="mt-6">
             <h2 class="text-xl font-semibold">Visi</h2>
             <p class="italic text-gray-700">{{ $data['visi'] }}</p>
