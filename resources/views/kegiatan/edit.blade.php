@@ -6,56 +6,110 @@
     </x-slot>
 
     <div class="py-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
-        <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+        <div class="max-w-4xl mx-auto bg-white p-10 rounded-2xl shadow-lg">
+
+            <h2 class="text-center text-2xl font-bold mb-6 tracking-wide">Edit Kegiatan</h2>
+            <hr class="border-pink-400 mb-8">
+
             <form action="{{ route('kegiatan.update', $kegiatan->id) }}" method="POST" enctype="multipart/form-data"
                 class="space-y-6">
                 @csrf
                 @method('PUT')
 
-                {{-- Nama Kegiatan --}}
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Nama Kegiatan</label>
-                    <input type="text" name="nama_kegiatan"
-                        value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}"
-                        class="w-full border-gray-300 rounded-lg shadow-sm" required>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                    {{-- FOTO --}}
+                    <div class="flex flex-col items-center">
+
+                        <div id="preview-container"
+                            class="relative w-60 h-60 bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center
+               rounded-xl border-2 border-dashed border-gray-400 overflow-hidden cursor-pointer
+               transition-all duration-300 hover:border-pink-500 hover:shadow-xl hover:scale-105 group"
+                            onclick="document.getElementById('gambar_kegiatan').click()">
+
+                            @if ($kegiatan->gambar_kegiatan)
+                                <img src="{{ asset('storage/' . $kegiatan->gambar_kegiatan) }}"
+                                    class="w-full h-full object-cover rounded-xl" id="preview-image">
+                            @else
+                                <div id="placeholder" class="flex flex-col items-center text-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 opacity-70"
+                                        viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 5c-3.859 0-7 3.14-7 7s3.141 7 7 7 7-3.14 7-7-3.141-7-7-7Zm0 14c-3.795 0-7-3.205-7-7s3.205-7 7-7 7 3.205 7 7-3.205 7-7 7Z" />
+                                    </svg>
+                                    <span class="font-semibold text-gray-600 mt-2">Tambah Foto</span>
+                                    <span class="text-gray-400 text-xs">(Klik untuk memilih)</span>
+                                </div>
+                            @endif
+
+                            <!-- Overlay teks saat hover -->
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center
+                    text-white font-semibold text-sm opacity-0 group-hover:opacity-100
+                    transition-opacity duration-300">
+                                Klik untuk mengedit foto
+                            </div>
+
+                        </div>
+
+                        <input type="file" id="gambar_kegiatan" name="gambar_kegiatan" class="hidden"
+                            accept="image/*" onchange="previewImage(event)">
+                    </div>
+
+                    {{-- INPUT --}}
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Judul Kegiatan</label>
+                            <input type="text" name="nama_kegiatan"
+                                value="{{ old('nama_kegiatan', $kegiatan->nama_kegiatan) }}"
+                                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-pink-400 focus:border-pink-400"
+                                required>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-1">Tanggal</label>
+                            <input type="date" name="tanggal_kegiatan"
+                                value="{{ old('tanggal_kegiatan', $kegiatan->tanggal_kegiatan) }}"
+                                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-pink-400 focus:border-pink-400"
+                                required>
+                        </div>
+                    </div>
+
                 </div>
 
-                {{-- Tanggal Kegiatan --}}
+                {{-- DESKRIPSI --}}
                 <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Tanggal Kegiatan</label>
-                    <input type="date" name="tanggal_kegiatan"
-                        value="{{ old('tanggal_kegiatan', $kegiatan->tanggal_kegiatan) }}"
-                        class="w-full border-gray-300 rounded-lg shadow-sm" required>
+                    <label class="block text-gray-800 font-semibold mb-2">Deskripsi</label>
+                    <textarea name="deskripsi" rows="5"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-pink-400 focus:border-pink-400">{{ old('deskripsi', $kegiatan->deskripsi) }}</textarea>
                 </div>
 
-                {{-- Deskripsi --}}
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Deskripsi</label>
-                    <textarea name="deskripsi" rows="4" class="w-full border-gray-300 rounded-lg shadow-sm">{{ old('deskripsi', $kegiatan->deskripsi) }}</textarea>
-                </div>
-
-                {{-- Gambar Kegiatan --}}
-                <div>
-                    <label class="block text-gray-700 font-semibold mb-2">Gambar Kegiatan</label>
-                    @if ($kegiatan->gambar_kegiatan)
-                        <img src="{{ asset('storage/' . $kegiatan->gambar_kegiatan) }}"
-                            class="w-32 h-32 object-cover rounded mb-3" alt="Gambar Kegiatan">
-                    @endif
-                    <input type="file" name="gambar_kegiatan" class="w-full border-gray-300 rounded-lg shadow-sm">
-                </div>
-
-                {{-- Tombol Aksi --}}
+                {{-- BUTTON --}}
                 <div class="flex justify-end gap-4">
                     <a href="{{ route('kegiatan.index') }}"
-                        class="bg-gray-400 hover:bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold">
-                        Batal
+                        class="bg-gray-300 hover:bg-gray-400 text-black px-6 py-3 rounded-lg font-semibold transition-all duration-300">
+                        Cancel
                     </a>
                     <button type="submit"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md">
+                        class="bg-[#3f0020] hover:bg-[#560029] text-white px-6 py-3 rounded-lg font-semibold shadow-md transition-all duration-300">
                         Update
                     </button>
                 </div>
+
             </form>
         </div>
     </div>
+
+    {{-- Script Preview Foto --}}
+    <script>
+        function previewImage(event) {
+            const container = document.getElementById('preview-container');
+            const placeholder = document.getElementById('placeholder');
+            if (placeholder) placeholder.style.display = "none";
+
+            container.innerHTML = `<img src="${URL.createObjectURL(event.target.files[0])}"
+                                       class="w-full h-full object-cover rounded-xl" />`;
+        }
+    </script>
+
 </x-app-layout>

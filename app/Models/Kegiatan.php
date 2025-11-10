@@ -18,5 +18,6 @@ class Kegiatan extends Model
         'tanggal_kegiatan',
         'gambar_kegiatan',
         'deskripsi',
+        'updated_by',
     ];
 }

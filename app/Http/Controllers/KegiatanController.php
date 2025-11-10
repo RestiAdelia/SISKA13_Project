@@ -5,18 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class KegiatanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show']);
+    }
+
     /**
      * Menampilkan daftar semua kegiatan.
      */
     public function index()
     {
-        $kegiatan = Kegiatan::latest()->paginate(5); 
+        $kegiatan = Kegiatan::latest()->paginate(5);
         return view('kegiatan.index', compact('kegiatan'));
     }
-
 
     /**
      * Form tambah kegiatan.
@@ -48,6 +54,7 @@ class KegiatanController extends Controller
             'tanggal_kegiatan' => $request->tanggal_kegiatan,
             'deskripsi' => $request->deskripsi,
             'gambar_kegiatan' => $gambarPath,
+            'updated_by' => Auth::user()->name, //Simpan nama user
         ]);
 
         return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
@@ -87,6 +94,7 @@ class KegiatanController extends Controller
             'tanggal_kegiatan' => $request->tanggal_kegiatan,
             'deskripsi' => $request->deskripsi,
             'gambar_kegiatan' => $gambarPath,
+            'updated_by' => Auth::user()->name, // ✅ Update nama user
         ]);
 
         return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil diperbarui!');
