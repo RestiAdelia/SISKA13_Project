@@ -11,7 +11,7 @@
             <div class="mb-8">
                 <div class="text-center mb-10">
                     <h2 class="font-bold text-3xl text-black border-b-2 border-pink-600 pb-3 **w-1/2** **mx-auto**">
-                       Kegiatan Sekolah
+                        Kegiatan Sekolah
                     </h2>
                 </div>
 
@@ -39,6 +39,7 @@
                             <th class="px-6 py-4 text-left text-gray-600 font-semibold w-64 min-w-[20rem]">Deskripsi
                             </th>
                             <th class="px-6 py-4 text-left text-gray-600 font-semibold w-32">Gambar</th>
+                            <th class="px-6 py-4 text-left text-gray-600 font-semibold w-40">Diupdate Oleh</th>
                             <th class="px-6 py-4 text-center text-gray-600 font-semibold w-48">Aksi</th>
                         </tr>
                     </thead>
@@ -62,6 +63,10 @@
                                     @else
                                         <span class="text-gray-400 italic">Tidak ada</span>
                                     @endif
+                                </td>
+                                {{-- Diupdate Oleh --}}
+                                <td class="px-6 py-4 text-gray-700">
+                                    {{ $item->updated_by ?? 'Belum Ada' }}
                                 </td>
                                 <td class="px-6 py-4 text-center flex justify-center gap-3">
                                     <a href="{{ route('kegiatan.edit', $item->id) }}"

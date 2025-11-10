@@ -16,10 +16,6 @@ use App\Http\Controllers\SiswaController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('kegiatan', KegiatanController::class)->except(['show']);
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -68,11 +64,13 @@ Route::post('/logout', function (Request $request) {
 Route::middleware(['auth'])->group(function () {
     Route::resource('guru_dan_staff', GuruDanStaffController::class);
     Route::resource('kelas', KelasController::class);
-    Route::resource('siswa',SiswaController::class);
+    Route::resource('siswa', SiswaController::class);
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::resource('kegiatan', KegiatanController::class)->except(['show']);
+});
+Route::get('/kegiatan/{kegiatan}', [KegiatanController::class, 'show'])->name('kegiatan.show');
 
-Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
 
 require __DIR__ . '/auth.php';
-
