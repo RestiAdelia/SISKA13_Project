@@ -3,29 +3,30 @@
         @csrf
         @method('patch')
 
-        {{-- Header --}}
-        <header class="mb-8 border-b pb-4 text-center md:text-left">
-            <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                {{ __('Edit Profile') }}
+        {{-- Header Form --}}
+        <header class="mb-8 border-b pb-4">
+            <h2 class="text-3xl font-extrabold text-gray-900 flex items-center">
+                <i class="fas fa-user-edit mr-3 text-[#560029]"></i>
+                {{ __('Perbarui Profil') }}
             </h2>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Perbarui informasi akun dan email Anda di bawah ini.') }}
+            <p class="mt-2 text-base text-gray-600">
+                {{ __('Perbarui informasi akun, email, dan detail kontak Anda.') }}
             </p>
         </header>
 
-        {{-- Grid dua kolom: Foto kiri, form kanan --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center">
-            {{-- FOTO PROFIL --}}
-            <div class="flex flex-col items-center justify-center w-full">
-                <div class="relative w-150 h-150 md:w-80 md:h-80 flex justify-center items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            
+            {{-- KOLOM KIRI: FOTO PROFIL (50%) --}}
+            <div class="lg:col-span-1 flex flex-col items-center">
+                {{-- PERUBAHAN DI SINI: w-48 h-48 diubah menjadi w-64 h-64 --}}
+                <div class="relative w-64 h-64 mb-6"> 
                     <img id="preview-image"
                         src="{{ Auth::user()->profile_photo_url ?? 'https://via.placeholder.com/200' }}"
                         alt="Foto Profil"
-                        class="w-full h-full object-cover border-4 border-gray-300 dark:border-gray-700 shadow-lg rounded-2xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-
+                        class="w-full h-full object-cover border-4 border-[#560029] shadow-2xl rounded-2xl transition duration-300 transform hover:scale-105">
                     <label for="photo"
-                        class="absolute bottom-3 right-3 bg-pink-600 hover:bg-pink-700 text-white p-4 rounded-xl cursor-pointer shadow-md transition">
-                        <i class="fa-solid fa-camera text-xl"></i>
+                        class="absolute bottom-0 right-0 bg-[#560029] hover:bg-[#3f0020] text-white p-3 rounded-full cursor-pointer shadow-lg transition duration-300 transform hover:scale-110">
+                        <i class="fas fa-camera text-xl"></i>
                     </label>
 
                     <input id="photo" name="photo" type="file" class="hidden" accept="image/*"
@@ -33,95 +34,96 @@
                 </div>
 
                 <x-input-error class="mt-4 text-center" :messages="$errors->get('photo')" />
+                <p class="text-sm text-gray-500 mt-2">Format: JPG, PNG. Max: 2MB</p>
             </div>
-
-            {{-- FORM DATA DIRI --}}
-            <div class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+            
+            {{-- KOLOM KANAN: FORM DATA DIRI (50%) --}}
+            <div class="lg:col-span-1 space-y-6"> 
+                
                 {{-- Nama --}}
                 <div>
-                    <x-input-label for="name" :value="__('Nama')" />
+                    <x-input-label for="name" :value="__('Nama Lengkap')" />
                     <x-text-input id="name" name="name" type="text"
-                        class="mt-2 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white rounded-lg"
+                        class="mt-1 block w-full rounded-xl border-gray-300 focus:border-gray-500 focus:ring-0 transition duration-300"
                         :value="old('name', $user->name)" required autofocus autocomplete="name" />
                     <x-input-error class="mt-2" :messages="$errors->get('name')" />
                 </div>
 
                 {{-- Email --}}
                 <div>
-                    <x-input-label for="email" :value="__('Email')" />
+                    <x-input-label for="email" :value="__('Alamat Email')" />
                     <x-text-input id="email" name="email" type="email"
-                        class="mt-2 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white rounded-lg"
+                        class="mt-1 block w-full rounded-xl border-gray-300 focus:border-gray-500 focus:ring-0 transition duration-300"
                         :value="old('email', $user->email)" required autocomplete="username" />
                     <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
                     @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-                        <div class="mt-2">
-                            <p class="text-sm text-gray-700 dark:text-gray-300">
+                        <div class="mt-3 bg-red-50 border-l-4 border-red-500 p-3">
+                            <p class="text-sm text-red-700 font-medium">
                                 {{ __('Email kamu belum diverifikasi.') }}
                                 <button form="send-verification"
-                                    class="underline text-sm text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-500">
+                                    class="underline text-sm text-red-600 hover:text-red-700 font-semibold ml-1">
                                     {{ __('Kirim ulang verifikasi') }}
                                 </button>
                             </p>
-                            @if (session('status') === 'verification-link-sent')
-                                <p class="mt-2 text-sm text-green-600 dark:text-green-400 font-medium">
-                                    {{ __('Link verifikasi baru telah dikirim ke email kamu.') }}
-                                </p>
-                            @endif
                         </div>
                     @endif
                 </div>
 
                 {{-- Alamat --}}
                 <div>
-                    <x-input-label for="alamat" :value="__('Alamat')" />
+                    <x-input-label for="alamat" :value="__('Alamat Lengkap')" />
                     <x-text-input id="alamat" name="alamat" type="text"
-                        class="mt-2 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white rounded-lg"
+                        class="mt-1 block w-full rounded-xl border-gray-300 focus:border-gray-500 focus:ring-0 transition duration-300"
                         :value="old('alamat', $user->alamat ?? '')" autocomplete="street-address" />
                     <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
                 </div>
 
                 {{-- Telepon --}}
                 <div>
-                    <x-input-label for="telepon" :value="__('No Telepon')" />
+                    <x-input-label for="telepon" :value="__('Nomor Telepon')" />
                     <x-text-input id="telepon" name="telepon" type="text"
-                        class="mt-2 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white rounded-lg"
+                        class="mt-1 block w-full rounded-xl border-gray-300 focus:border-gray-500 focus:ring-0 transition duration-300"
                         :value="old('telepon', $user->telepon ?? '')" autocomplete="tel" />
                     <x-input-error class="mt-2" :messages="$errors->get('telepon')" />
                 </div>
-
-                {{-- Tombol --}}
-                <div class="flex justify-end gap-4 pt-6 border-t mt-6">
-                    <a href="{{ route('dashboard') }}"
-                        class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-6 py-2.5 rounded-lg shadow transition">
-                        Cancel
-                    </a>
-
-                    <button type="submit"
-                        class="bg-[#820642] hover:bg-[#b94e81] text-white font-semibold px-6 py-2.5 rounded-lg shadow transition">
-                        <i class="fa-solid fa-floppy-disk mr-2"></i> Save
-                    </button>
-                </div>
-
-                {{-- Tombol Ganti Password via OTP --}}
-                <div class="flex justify-end mt-4">
-                    <a href="{{ route('password.requestOtpForm') }}"
-                        class="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-2.5 rounded-lg shadow transition">
-                        <i class="fa-solid fa-key mr-2"></i> Ganti Password (Verifikasi Email)
-                    </a>
-                </div>
             </div>
+        </div>
+        
+        {{-- Tombol Aksi --}}
+        <div class="flex flex-col sm:flex-row justify-end gap-4 mt-10 pt-6 border-t border-gray-100">
+
+            {{-- Ganti Password --}}
+            <a href="{{ route('password.requestOtpForm') }}"
+                class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-2.5 rounded-xl shadow-sm transition duration-300 flex items-center justify-center">
+                <i class="fas fa-lock mr-2"></i> Ganti Password
+            </a>
+            
+            {{-- Cancel --}}
+            <a href="{{ route('dashboard') }}"
+                class="border border-gray-300 text-gray-700 font-semibold px-6 py-2.5 rounded-xl hover:bg-gray-50 transition duration-300 flex items-center justify-center">
+                Cancel
+            </a>
+
+            {{-- Save --}}
+            <button type="submit"
+                class="bg-[#560029] hover:bg-[#3f0020] text-white font-semibold px-6 py-2.5 rounded-xl shadow-lg shadow-[#560029]/30 transition duration-300 transform hover:scale-[1.02] flex items-center justify-center">
+                <i class="fas fa-save mr-2"></i> Simpan Perubahan
+            </button>
         </div>
     </form>
 
     {{-- Preview Foto JS --}}
     <script>
         function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById('preview-image').src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    document.getElementById('preview-image').src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 </section>
