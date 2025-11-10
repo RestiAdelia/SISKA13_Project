@@ -6,13 +6,35 @@
     </x-slot>
 
     <div class="py-8 px-6 max-w-3xl mx-auto">
-        <div class="bg-white p-6 rounded-lg shadow-md border">
-            <form action="{{ route('kelas.update', $kelas->id) }}" method="POST">
+        <div class="bg-white p-6 rounded-lg shadow-md border"
+             x-data="{
+                tahunAjar: '{{ old('tahun_ajar', $kelas->tahun_ajar ?? '') }}',
+                generateTahunAjar() {
+                    const now = new Date();
+                    const tahunSekarang = now.getFullYear();
+                    const tahunDepan = tahunSekarang + 1;
+                    this.tahunAjar = `${tahunSekarang}/${tahunDepan}`;
+                }
+             }"
+             x-init="if(!tahunAjar) generateTahunAjar()">
+
+            {{-- Notifikasi Error --}}
+            @if ($errors->any())
+                <div class="bg-red-100 text-red-800 border border-red-300 px-4 py-2 rounded mb-4">
+                    <ul class="list-disc ml-5 text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('kelas.update', $kelas->id) }}" method="POST" class="space-y-5">
                 @csrf
                 @method('PUT')
 
                 {{-- Nama Kelas --}}
-                <div class="mb-4">
+                <div>
                     <label for="nama_kelas" class="block font-semibold mb-1">Nama Kelas</label>
                     <input 
                         type="text" 
@@ -25,8 +47,8 @@
                     >
                 </div>
 
-                {{-- Pilih Guru Pengampu --}}
-                <div class="mb-6">
+                {{-- Guru Pengampu --}}
+                <div>
                     <label for="guru_id" class="block font-semibold mb-1">Guru Pengampu</label>
                     <select 
                         name="guru_id" 
@@ -35,11 +57,28 @@
                     >
                         <option value="">-- Pilih Guru --</option>
                         @foreach ($guru as $g)
-                            <option value="{{ $g->id }}" {{ $kelas->guru_id == $g->id ? 'selected' : '' }}>
+                            <option value="{{ $g->id }}" 
+                                {{ old('guru_id', $kelas->guru_id) == $g->id ? 'selected' : '' }}>
                                 {{ $g->nama }}
                             </option>
                         @endforeach
                     </select>
+                </div>
+
+                {{-- Tahun Ajar --}}
+                <div>
+                    <label for="tahun_ajar" class="block font-semibold mb-1">Tahun Ajar</label>
+                    <input 
+                        type="text" 
+                        id="tahun_ajar" 
+                        name="tahun_ajar" 
+                        x-model="tahunAjar"
+                        value="{{ old('tahun_ajar', $kelas->tahun_ajar) }}"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        placeholder="Contoh: 2024/2025" 
+                        required
+                    >
+                    <p class="text-gray-500 text-sm mt-1">*Otomatis diisi berdasarkan tahun sekarang, bisa diubah jika perlu.</p>
                 </div>
 
                 {{-- Tombol Aksi --}}
@@ -56,4 +95,7 @@
             </form>
         </div>
     </div>
+
+    {{-- Script AlpineJS --}}
+    <script src="//unpkg.com/alpinejs" defer></script>
 </x-app-layout>

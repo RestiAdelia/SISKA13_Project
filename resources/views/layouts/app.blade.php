@@ -7,7 +7,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     </head>
 
@@ -18,7 +18,7 @@
             <!-- Logo / Judul -->
             <div class="px-4 py-4 font-bold whitespace-nowrap overflow-hidden flex items-center">
                 <!-- Logo kecil -->
-                <img src="/images/logo.jpg" alt="Logo" class="h-8 w-8 object-contain">
+                <img src="/images/logo.png" alt="Logo" class="h-12 w-12 object-contain">
                 <!-- Judul teks muncul saat hover -->
                 <span class="ml-2 text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     SISKA13
@@ -29,27 +29,28 @@
 
                 <a href="{{ route('dashboard') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
-        {{ request()->routeIs('dashboard') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                   {{ request()->routeIs('dashboard') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                     <i class="fa-solid fa-house w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Dashboard</span>
                 </a>
 
                 <a href="{{ route('visi-misi.index') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
-        {{ request()->routeIs('visi-misi.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                   {{ request()->routeIs('visi-misi.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                     <i class="fa-solid fa-school w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Visi Misi</span>
                 </a>
 
                 <a href="{{ route('guru_dan_staff.index') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
-        {{ request()->routeIs('guru_dan_staff.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                  {{ request()->routeIs('guru_dan_staff.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                     <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Data Guru & Staf</span>
                 </a>
 
-                <a href="#"
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
+                <a href="{{ route('siswa.index') }}"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
+                     {{ request()->routeIs('siswa.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                     <i class="fa-solid fa-user-graduate w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Data Siswa</span>
                 </a>
@@ -66,7 +67,7 @@
                     <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Kegiatan</span>
                 </a>
-                
+
 
                 <a href="#"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
@@ -112,7 +113,7 @@
                             </svg>
                         </button>
 
-                     
+
                         <!-- Dropdown Menu -->
                         <div x-show="open" @click.outside="open = false"
                             class="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border py-2 z-50">
@@ -147,5 +148,6 @@
             </main>
         </div>
     </body>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     </html>

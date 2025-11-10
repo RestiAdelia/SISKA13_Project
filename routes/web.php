@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\OTPController;
 use App\Http\Controllers\GuruDanStaffController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SiswaController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
@@ -67,6 +68,7 @@ Route::post('/logout', function (Request $request) {
 Route::middleware(['auth'])->group(function () {
     Route::resource('guru_dan_staff', GuruDanStaffController::class);
     Route::resource('kelas', KelasController::class);
+    Route::resource('siswa',SiswaController::class);
 });
 
 
