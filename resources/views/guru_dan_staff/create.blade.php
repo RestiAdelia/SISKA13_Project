@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -143,8 +142,13 @@
                     {{-- Jabatan --}}
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Jabatan</label>
-                        <input type="text" name="jabatan" value="{{ old('jabatan') }}"
-                            class="w-full border-gray-300 rounded-lg shadow-sm px-3 py-2">
+                        <select name="jabatan" class="w-full border-gray-300 rounded-lg shadow-sm px-3 py-2">
+                            <option value="">-- Pilih Jabatan --</option>
+                            <option value="Kepala Sekolah" {{ old('jabatan') == 'Kepala Sekolah' ? 'selected' : '' }}>
+                                Kepala Sekolah</option>
+                            <option value="Guru" {{ old('jabatan') == 'Guru' ? 'selected' : '' }}>Guru</option>
+                            <option value="Staf" {{ old('jabatan') == 'Staf' ? 'selected' : '' }}>Staf</option>
+                        </select>
                     </div>
 
                     {{-- Pendidikan Terakhir --}}

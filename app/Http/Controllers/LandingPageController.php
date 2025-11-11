@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\VisiMisi;
-use App\Models\Kegiatan; // tambahkan model kegiatan
+use App\Models\Kegiatan;
+use App\Models\GuruDanStaff;
 
 class LandingPageController extends Controller
 {
@@ -15,7 +16,20 @@ class LandingPageController extends Controller
         // Ambil semua kegiatan, urutkan dari yang terbaru
         $kegiatan = Kegiatan::latest()->get();
 
-        // Kirim keduanya ke view landing page
-        return view('landing_page', compact('visimisi', 'kegiatan'));
+        // Ambil data guru & staff (tanpa kepala sekolah)
+      $staff = GuruDanStaff::where('jabatan', '!=', 'Kepala Sekolah')
+    ->orderByRaw("
+        CASE
+            WHEN jabatan LIKE '%Guru%' THEN 1
+            WHEN jabatan LIKE '%Staf%' THEN 2
+            ELSE 3
+        END
+    ")
+    ->orderBy('no_urut')
+    ->orderBy('id')
+    ->get();
+
+        // Kirim ke view landing page
+        return view('landing_page', compact('visimisi', 'kegiatan', 'staff'));
     }
 }
