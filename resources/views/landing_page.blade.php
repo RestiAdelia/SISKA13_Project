@@ -142,7 +142,7 @@
         <div class="container">
             <h2 class="section-title mb-3 text-center">Staf & Guru</h2>
 
-            <!-- Filter Buttons (Kiri) -->
+            <!-- Filter Buttons -->
             <div class="d-flex mb-4">
                 <div class="filter-wrapper">
                     <button class="btn filter-btn active" data-filter="all">Semua</button>
@@ -153,42 +153,25 @@
 
             <!-- Card List -->
             <div class="row text-center g-4 justify-content-center">
-                <!-- Guru -->
-                <div class="col-6 col-md-3 filter-item guru">
-                    <div class="card p-3">
-                        <img src="https://i.pinimg.com/736x/c2/f7/9a/c2f79a13c23fe220552492803d8da7a3.jpg"
-                            alt="Guru 1" class="guru-img mx-auto d-block" />
-                        <h5 class="card-title mt-3">Nama</h5>
-                        <p class="card-text">Jabatan:</p>
+                @forelse($staff as $s)
+                    @php
+                        $kategori = Str::contains(strtolower($s->jabatan), 'guru') ? 'guru' : 'staf';
+                    @endphp
+                    <div class="col-6 col-md-3 filter-item {{ $kategori }}">
+                        <div class="card p-3">
+                            <img src="{{ $s->foto ? asset('uploads/' . $s->foto) : 'https://i.pinimg.com/736x/c2/f7/9a/c2f79a13c23fe220552492803d8da7a3.jpg' }}"
+                                alt="{{ $s->nama }}" class="guru-img mx-auto d-block" />
+                            <h5 class="card-title mt-3">{{ $s->nama }}</h5>
+                            <p class="card-text">{{ $s->jabatan }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 col-md-3 filter-item guru">
-                    <div class="card p-3">
-                        <img src="https://i.pinimg.com/736x/c2/f7/9a/c2f79a13c23fe220552492803d8da7a3.jpg"
-                            alt="Guru 2" class="guru-img mx-auto d-block" />
-                        <h5 class="card-title mt-3">Nama</h5>
-                        <p class="card-text">Jabatan:</p>
+                @empty
+                    <div class="col-12 text-center">
+                        <p class="text-muted">Belum ada data guru atau staf.</p>
                     </div>
-                </div>
-
-                <!-- Staf -->
-                <div class="col-6 col-md-3 filter-item staf">
-                    <div class="card p-3">
-                        <img src="https://i.pinimg.com/736x/c2/f7/9a/c2f79a13c23fe220552492803d8da7a3.jpg"
-                            alt="Staf 1" class="guru-img mx-auto d-block" />
-                        <h5 class="card-title mt-3">Nama</h5>
-                        <p class="card-text">Jabatan:</p>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3 filter-item staf">
-                    <div class="card p-3">
-                        <img src="https://i.pinimg.com/736x/c2/f7/9a/c2f79a13c23fe220552492803d8da7a3.jpg"
-                            alt="Staf 2" class="guru-img mx-auto d-block" />
-                        <h5 class="card-title mt-3">Nama</h5>
-                        <p class="card-text">Jabatan:</p>
-                    </div>
-                </div>
+                @endforelse
             </div>
+
         </div>
     </section>
 
@@ -201,7 +184,7 @@
                 @forelse ($kegiatan as $item)
                     <div class="col-md-4">
                         <!-- Bungkus card dengan link -->
-                         <a href="{{ route('kegiatan.show', $item->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('kegiatan.show', $item->id) }}" class="text-decoration-none text-dark">
                             <div class="card h-100 shadow-sm hover:shadow-lg transition">
                                 <img src="{{ asset('storage/' . $item->gambar_kegiatan) }}"
                                     alt="{{ $item->nama_kegiatan }}" class="card-img-top"
@@ -360,6 +343,33 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const items = document.querySelectorAll('.filter-item');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Hapus class "active" dari semua tombol
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    // Tambahkan ke tombol yang diklik
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    items.forEach(item => {
+                        // Jika tombol "Semua" diklik, tampilkan semua
+                        if (filter === 'all' || item.classList.contains(filter)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });z
+                });
+            });
+        });
+    </script>
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
