@@ -20,4 +20,9 @@ class Kelas extends Model
     {
         return $this->belongsTo(GuruDanStaff::class, 'guru_id');
     }
+    
+     public function tugas()
+    {
+        return $this->hasMany(Tugas::class);
+    }
 }

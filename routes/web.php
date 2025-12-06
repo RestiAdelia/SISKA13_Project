@@ -14,6 +14,7 @@ use App\Http\Controllers\GuruDanStaffController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MouController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TugasController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
@@ -67,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kelas', KelasController::class);
     Route::resource('siswa', SiswaController::class);
     Route::resource('mou', MouController::class);
+    Route::resource('tugas', TugasController::class);
 });
 
 Route::middleware(['auth'])->group(function () {
