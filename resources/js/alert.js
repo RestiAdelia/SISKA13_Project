@@ -7,7 +7,7 @@
 
                     Swal.fire({
                         title: 'Yakin ingin menghapus?',
-                        text: "Data kegiatan ini akan dihapus permanen!",
+                        text: "Data ini akan dihapus permanen!",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#d33',
@@ -22,4 +22,7 @@
                 });
             });
         });
+
+
+        
   

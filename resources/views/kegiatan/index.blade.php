@@ -1,4 +1,5 @@
 <x-app-layout>
+     @include('components.alert-success');
     <x-slot name="header">
         <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
             {{ __('Kegiatan Sekolah') }}
@@ -6,6 +7,7 @@
     </x-slot>
 
     <div class="p-6 bg-gray-50 min-h-screen" x-data="{ search: '' }">
+        
 
         {{-- Judul Halaman --}}
         <div class="mb-10">

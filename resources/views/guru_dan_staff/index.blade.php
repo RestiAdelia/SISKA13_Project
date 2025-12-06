@@ -1,4 +1,5 @@
 <x-app-layout>
+     @include('components.alert-success');
     <x-slot name="header">
         <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
             {{ __('Data Guru dan Staff') }}

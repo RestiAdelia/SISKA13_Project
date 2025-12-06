@@ -66,7 +66,7 @@ class GuruDanStaffController extends Controller
 
         GuruDanStaff::create($validatedData);
 
-        return redirect()->route('guru_dan_staff.index')->with('success', 'Data guru dan staff berhasil ditambahkan.');
+        return redirect()->route('guru_dan_staff.index')->with('success_add', 'Data guru dan staff berhasil ditambahkan.');
     }
 
     /**
@@ -127,7 +127,7 @@ class GuruDanStaffController extends Controller
 
         $guruDanStaff->update($validatedData);
 
-        return redirect()->route('guru_dan_staff.index')->with('success', 'Data guru dan staff berhasil diperbarui.');
+        return redirect()->route('guru_dan_staff.index')->with('success_update', 'Data guru dan staff berhasil diperbarui.');
     }
 
 

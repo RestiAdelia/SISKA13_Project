@@ -1,116 +1,176 @@
 <x-app-layout>
+     @include('components.alert-success');
     <x-slot name="header">
-        <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
-            {{ __('Data Siswa') }}
-        </h2>
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <h2 class="font-bold text-2xl md:text-3xl text-gray-800 leading-tight">
+                {{ __('Data Siswa') }}
+            </h2>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3 text-sm text-gray-500">
+                    <li><a href="#" class="hover:text-[#560029] transition-colors">Dashboard</a></li>
+                    <li>/</li>
+                    <li class="font-medium text-gray-900">Data Siswa</li>
+                </ol>
+            </nav>
+        </div>
     </x-slot>
 
-    <div class="py-8 px-4 md:px-10 max-w-7xl mx-auto" x-data="{ tahunAjar: '{{ request('tahun_ajar') }}', kelasId: '{{ request('kelas_id') }}' }">
+    <div class="py-10">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" x-data="{ search: '' }">
 
-        {{-- Filter & Tambah --}}
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-            <form method="GET" action="{{ route('siswa.index') }}"
-                class="flex flex-wrap items-center gap-3 w-full md:w-auto" x-data x-on:change="$el.submit()"
-                x-on:input.debounce.500ms="$el.submit()">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
 
-                {{-- Input teks untuk search nama siswa --}}
-                <input type="text" name="search" placeholder=" 🔍 Cari nama siswa..."
-                    value="{{ request('search') }}"
-                    class="border rounded-lg px-4 py-2 text-base focus:ring-2 focus:ring-blue-500 min-w-[200px]">
+                {{-- Toolbar --}}
+                <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex flex-col lg:flex-row gap-4 justify-between items-center">
 
-                {{-- Dropdown Tahun Ajar --}}
-                <select name="tahun_ajar"
-                    class="border rounded-lg px-4 py-2 text-base focus:ring-2 focus:ring-blue-500 min-w-[150px]">
-                    <option value="">Semua</option>
-                    @foreach ($tahunAjarList as $ta)
-                        <option value="{{ $ta }}" {{ request('tahun_ajar') == $ta ? 'selected' : '' }}>
-                            {{ $ta }}
-                        </option>
-                    @endforeach
-                </select>
+                    <form id="filterForm" method="GET" action="{{ route('siswa.index') }}"
+                        class="w-full lg:flex-1 flex flex-col sm:flex-row gap-3">
 
-                {{-- Dropdown Kelas --}}
-                <select name="kelas_id"
-                    class="border rounded-lg px-4 py-2 text-base focus:ring-2 focus:ring-blue-500 min-w-[180px]">
-                    <option value="">Semua Kelas</option>
-                    @foreach ($kelas as $k)
-                        <option value="{{ $k->id }}" {{ request('kelas_id') == $k->id ? 'selected' : '' }}>
-                            {{ $k->nama_kelas }}
-                        </option>
-                    @endforeach
-                </select>
-            </form>
+                        {{-- Search --}}
+                        <div class="relative flex-1">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                            </div>
 
-            {{-- Tombol Tambah --}}
-            <a href="{{ route('siswa.create') }}"
-                class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition duration-300 transform hover:scale-105">
-                ➕ Tambah Siswa
-            </a>
-        </div>
+                            <input id="searchInput" type="text" x-model="search"
+                                placeholder="Cari nama, NIPD atau NISN..."
+                                class="pl-10 w-full rounded-lg border-gray-300 focus:border-[#560029] focus:ring focus:ring-[#560029] focus:ring-opacity-20 transition shadow-sm text-sm py-2.5">
+                        </div>
 
-        {{-- Tabel Data --}}
-        <div class="bg-white p-6 rounded-lg shadow-md border overflow-x-auto">
-            <table class="min-w-full border border-gray-200 text-sm">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-4 py-2 border text-center">No</th>
-                        <th class="px-4 py-2 border text-center">Nama</th>
-                        <th class="px-4 py-2 border text-center">NIPD</th>
-                        <th class="px-4 py-2 border text-center">NISN</th>
-                        <th class="px-4 py-2 border text-center">Jenis Kelamin</th>
-                        <th class="px-4 py-2 border text-center w-36">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($siswa as $index => $s)
-                        <tr class="border-t hover:bg-gray-50 transition  ">
-                            <td class="px-4 py-2 border ">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-2 border">{{ $s->nama_siswa }}</td>
-                            <td class="px-4 py-2 border">{{ $s->nipd }}</td>
-                            <td class="px-4 py-2 border">{{ $s->nisn }}</td>
-                            <td class="px-4 py-2 border">{{ $s->jenis_kelamin }}</td>
+                        {{-- Filter Tahun --}}
+                        <div class="sm:w-40 relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-regular fa-calendar text-gray-400"></i>
+                            </div>
+                            <select name="tahun_ajar" onchange="document.getElementById('filterForm').submit()"
+                                class="pl-10 w-full rounded-lg border-gray-300 focus:border-[#560029] focus:ring focus:ring-[#560029] focus:ring-opacity-20 transition shadow-sm text-sm py-2.5 cursor-pointer bg-white">
+                                <option value="">Semua Tahun</option>
+                                @foreach ($tahunAjarList as $ta)
+                                    <option value="{{ $ta }}" {{ request('tahun_ajar') == $ta ? 'selected' : '' }}>
+                                        {{ $ta }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                            </td>
-                            <td class="px-4 py-2 text-center flex justify-center gap-2">
+                        {{-- Filter Kelas --}}
+                        <div class="sm:w-48 relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fa-solid fa-chalkboard text-gray-400"></i>
+                            </div>
+                            <select name="kelas_id" onchange="document.getElementById('filterForm').submit()"
+                                class="pl-10 w-full rounded-lg border-gray-300 focus:border-[#560029] focus:ring focus:ring-[#560029] focus:ring-opacity-20 transition shadow-sm text-sm py-2.5 cursor-pointer bg-white">
+                                <option value="">Semua Kelas</option>
+                                @foreach ($kelas as $k)
+                                    <option value="{{ $k->id }}" {{ request('kelas_id') == $k->id ? 'selected' : '' }}>
+                                        {{ $k->nama_kelas }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
 
-                                {{-- Lihat --}}
-                                <a href="{{ route('siswa.show', $s->id) }}"
-                                    class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition inline-flex items-center gap-1">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
+                    {{-- Tombol Tambah --}}
+                    <div class="w-full lg:w-auto flex justify-end">
+                        <a href="{{ route('siswa.create') }}"
+                            class="inline-flex items-center justify-center px-5 py-2.5 bg-[#560029] hover:bg-[#3f0020] text-white text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 focus:ring-2 focus:ring-offset-2 focus:ring-[#560029]">
+                            <i class="fa-solid fa-user-plus mr-2"></i> Tambah Siswa
+                        </a>
+                    </div>
+                </div>
 
-                                {{-- Edit --}}
-                                <a href="{{ route('siswa.edit', $s->id) }}"
-                                    class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition inline-flex items-center gap-1">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                {{-- Hapus --}}
-                                 <form action=" route('siswa.destroy', $s->id) }}" method="POST"
-                                    class="delete-form inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button"
-                                        class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition inline-flex items-center gap-1 btn-delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
+                {{-- Tabel --}}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100/80 border-b">
+                            <tr>
+                                <th class="px-6 py-4 font-bold text-center w-16">No</th>
+                                <th class="px-6 py-4 font-bold">Nama Siswa</th>
+                                <th class="px-6 py-4 font-bold">NIPD</th>
+                                <th class="px-6 py-4 font-bold">NISN</th>
+                                <th class="px-6 py-4 font-bold text-center">L/P</th>
+                                <th class="px-6 py-4 font-bold text-center w-40">Aksi</th>
+                            </tr>
+                        </thead>
 
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center py-4 text-gray-500">Belum ada data siswa.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        <tbody class="divide-y divide-gray-100">
+                            @forelse ($siswa as $index => $s)
+                                <tr class="bg-white hover:bg-gray-50 transition-colors duration-200"
+                                    data-search="{{ strtolower($s->nama_siswa . ' ' . $s->nipd . ' ' . $s->nisn) }}"
+                                    x-show="$el.dataset.search.includes(search.toLowerCase())">
 
-            {{-- Paginasi --}}
-            <div class="mt-4">
-                {{ $siswa->appends(request()->query())->links() }}
+                                    <td class="px-6 py-4 text-center font-medium text-gray-500">
+                                        {{ $siswa->firstItem() + $index }}
+                                    </td>
+
+                                    <td class="px-6 py-4 font-semibold text-gray-800">
+                                        {{ $s->nama_siswa }}
+                                    </td>
+
+                                    <td class="px-6 py-4 font-mono text-gray-600">
+                                        {{ $s->nipd }}
+                                    </td>
+
+                                    <td class="px-6 py-4 font-mono text-gray-600">
+                                        {{ $s->nisn }}
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center">
+                                        @if ($s->jenis_kelamin == 'Laki-laki')
+                                            <span class="inline-flex w-8 h-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-xs">L</span>
+                                        @else
+                                            <span class="inline-flex w-8 h-8 items-center justify-center rounded-full bg-pink-100 text-pink-600 font-bold text-xs">P</span>
+                                        @endif
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <a href="{{ route('siswa.show', $s->id) }}"
+                                                class="w-8 h-8 flex items-center justify-center rounded-lg text-blue-500 hover:bg-blue-50 hover:text-blue-700 transition">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+
+                                            <a href="{{ route('siswa.edit', $s->id) }}"
+                                                class="w-8 h-8 flex items-center justify-center rounded-lg text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+
+                                            <form action="{{ route('siswa.destroy', $s->id) }}" method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button"
+                                                    class="btn-delete w-8 h-8 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 hover:text-red-600 transition">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="px-6 py-10 text-center text-gray-500">
+                                        <i class="fa-solid fa-user-slash text-4xl text-gray-300 mb-3"></i>
+                                        <p class="text-base font-medium">Belum ada data siswa.</p>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- Pagination --}}
+                @if ($siswa->hasPages())
+                    <div class="p-4 border-t border-gray-100 bg-gray-50">
+                        {{ $siswa->appends(request()->query())->links() }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 
+    {{-- Scripts --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+
+  
 </x-app-layout>

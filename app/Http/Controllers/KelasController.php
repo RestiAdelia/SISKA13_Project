@@ -11,9 +11,12 @@ class KelasController extends Controller
     /**
      * Tampilkan daftar kelas
      */
- public function index(Request $request)
+  public function index(Request $request)
 {
-    $query = Kelas::with('guru')->orderBy('tahun_ajar', 'desc');
+    $query = Kelas::with('guru')
+        ->orderBy('tahun_ajar', 'desc')
+        ->orderByRaw('CAST(REGEXP_REPLACE(LOWER(nama_kelas), "[^0-9]", "") AS UNSIGNED) ASC')
+        ->orderByRaw('LOWER(nama_kelas) ASC'); 
 
     // Filter berdasarkan tahun ajar
     if ($request->filled('tahun_ajar')) {
@@ -23,17 +26,17 @@ class KelasController extends Controller
     // Pencarian nama kelas atau guru
     if ($request->filled('search')) {
         $search = $request->search;
-        $query->where(function($q) use ($search) {
+        $query->where(function ($q) use ($search) {
             $q->where('nama_kelas', 'like', "%$search%")
-              ->orWhereHas('guru', function($guruQuery) use ($search) {
-                  $guruQuery->where('nama', 'like', "%$search%");
-              });
+                ->orWhereHas('guru', function ($guruQuery) use ($search) {
+                    $guruQuery->where('nama', 'like', "%$search%");
+                });
         });
     }
 
     $kelas = $query->paginate(10);
 
-    // Ambil daftar tahun ajar unik untuk filter dropdown
+    // Daftar filter tahun ajar
     $daftar_tahun = Kelas::select('tahun_ajar')
         ->distinct()
         ->orderBy('tahun_ajar', 'desc')
@@ -41,6 +44,7 @@ class KelasController extends Controller
 
     return view('kelas.index', compact('kelas', 'daftar_tahun'));
 }
+
 
     /**
      * Form tambah kelas
@@ -66,31 +70,35 @@ class KelasController extends Controller
     /**
      * Simpan data kelas baru
      */
-  public function store(Request $request)
-{
-    $request->validate([
-        'nama_kelas' => 'required|string|max:255',
-        'guru_id' => 'nullable|exists:guru_dan_staff,id',
-        'tahun_ajar' => 'nullable|regex:/^\d{4}\/\d{4}$/',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_kelas' => 'required|string|max:255',
+            'guru_id' => 'nullable|exists:guru_dan_staff,id',
+            'tahun_ajar' => 'nullable|regex:/^\d{4}\/\d{4}$/',
+            'mata_pelajaran' => 'nullable|string',
+        ]);
 
-    $tahunAjar = $request->tahun_ajar;
-    if (empty($tahunAjar)) {
-        $tahunSekarang = date('Y');
-        $tahunDepan = $tahunSekarang + 1;
-        $tahunAjar = (date('n') >= 7)
-            ? "$tahunSekarang/$tahunDepan"
-            : ($tahunSekarang - 1) . "/$tahunSekarang";
+        $tahunAjar = $request->tahun_ajar;
+        if (empty($tahunAjar)) {
+            $tahunSekarang = date('Y');
+            $tahunDepan = $tahunSekarang + 1;
+            $tahunAjar = (date('n') >= 7)
+                ? "$tahunSekarang/$tahunDepan"
+                : ($tahunSekarang - 1) . "/$tahunSekarang";
+        }
+        $mataPelajaran = $request->mata_pelajaran
+            ? json_decode($request->mata_pelajaran, true)
+            : [];
+        Kelas::create([
+            'nama_kelas' => $request->nama_kelas,
+            'guru_id' => $request->guru_id,
+            'tahun_ajar' => $tahunAjar,
+            'mata_pelajaran' =>$mataPelajaran,
+        ]);
+
+        return redirect()->route('kelas.index')->with('success_add', 'Kelas berhasil ditambahkan.');
     }
-
-    Kelas::create([
-        'nama_kelas' => $request->nama_kelas,
-        'guru_id' => $request->guru_id,
-        'tahun_ajar' => $tahunAjar,
-    ]);
-
-    return redirect()->route('kelas.index')->with('success', 'Kelas berhasil ditambahkan.');
-}
 
 
     /**
@@ -115,16 +123,21 @@ class KelasController extends Controller
                 'required',
                 'regex:/^\d{4}\/\d{4}$/',
             ],
+              'mata_pelajaran' => 'nullable|string', 
         ]);
 
         $kelas = Kelas::findOrFail($id);
+         $mataPelajaran = $request->mata_pelajaran
+        ? json_decode($request->mata_pelajaran, true)
+        : [];
         $kelas->update([
             'nama_kelas' => $request->nama_kelas,
             'guru_id' => $request->guru_id,
             'tahun_ajar' => $request->tahun_ajar,
+             'mata_pelajaran' => $mataPelajaran,
         ]);
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diperbarui.');
+        return redirect()->route('kelas.index')->with('success_update', 'Data kelas berhasil diperbarui.');
     }
 
     /**

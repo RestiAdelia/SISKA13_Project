@@ -1,4 +1,5 @@
 <x-app-layout>
+     @include('components.alert-success');
     {{-- Header Section --}}
     <x-slot name="header">
         <h2 class="font-extrabold text-3xl text-gray-900 leading-tight">

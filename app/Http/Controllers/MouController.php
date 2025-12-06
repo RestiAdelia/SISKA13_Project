@@ -54,7 +54,7 @@ class MouController extends Controller
             'file' => $filePath,
         ]);
 
-        return redirect()->route('mou.index')->with('success', 'MoU berhasil ditambahkan.');
+        return redirect()->route('mou.index')->with('success_add', 'MoU berhasil ditambahkan.');
     }
     public function edit($id)
     {
@@ -104,7 +104,7 @@ class MouController extends Controller
             'file' => $filePath,
         ]);
 
-        return redirect()->route('mou.index')->with('success', 'MoU berhasil diperbarui.');
+        return redirect()->route('mou.index')->with('success_update', 'MoU berhasil diperbarui.');
     }
 
   

@@ -80,6 +80,12 @@
                     <i class="fa-solid fa-pen-to-square w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Rekap Absen</span>
                 </a>
+                <a href="#"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
+                   <i class="fa-solid fa-tasks w-6 text-lg text-center"></i>
+
+                    <span class="whitespace-nowrap hidden md:group-hover:block">Tugas Siswa</span>
+                </a>
 
                 <a href="{{ route('profile.show') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200

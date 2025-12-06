@@ -10,7 +10,11 @@ class Kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
-    protected $fillable = ['nama_kelas','nama_kelas','tahun_ajar', 'guru_id', ];
+    protected $fillable = ['nama_kelas', 'nama_kelas', 'tahun_ajar', 'guru_id', 'mata_pelajaran'];
+    protected $casts = [
+        'mata_pelajaran' => 'array',
+    ];
+
 
     public function guru()
     {

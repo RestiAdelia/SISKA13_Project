@@ -57,7 +57,7 @@ class KegiatanController extends Controller
             'updated_by' => Auth::user()->name, //Simpan nama user
         ]);
 
-        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan!');
+        return redirect()->route('kegiatan.index')->with('success_add', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
@@ -97,7 +97,7 @@ class KegiatanController extends Controller
             'updated_by' => Auth::user()->name, // ✅ Update nama user
         ]);
 
-        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil diperbarui!');
+        return redirect()->route('kegiatan.index')->with('success_update', 'Kegiatan berhasil diperbarui!');
     }
 
     /**
