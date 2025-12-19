@@ -10,6 +10,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\OTPController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GuruDanStaffController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MouController;
@@ -76,5 +77,20 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/kegiatan/{kegiatan}', [KegiatanController::class, 'show'])->name('kegiatan.show');
 
+// PUBLIK
+Route::post('/hubungi-kami', [ContactController::class, 'store'])
+    ->name('contact.store');
 
+// ADMIN
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/pesan', [ContactController::class, 'index'])
+        ->name('pesan.index');
+
+    Route::get('/pesan/{contact}', [ContactController::class, 'show'])
+        ->name('pesan.show');
+
+    Route::delete('/pesan/{contact}', [ContactController::class, 'destroy'])
+        ->name('pesan.destroy');
+});
 require __DIR__ . '/auth.php';

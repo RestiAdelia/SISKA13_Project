@@ -82,11 +82,18 @@
                 </a>
                 <a href="{{ route('tugas.index') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
-                   <i class="fa-solid fa-tasks w-6 text-lg text-center"></i>
+                    <i class="fa-solid fa-tasks w-6 text-lg text-center"></i>
 
                     <span class="whitespace-nowrap hidden md:group-hover:block">Tugas Siswa</span>
                 </a>
-
+                <a href="{{ route('pesan.index') }}"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+                    {{ request()->routeIs('pesan.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                    <i class="fa-solid fa-envelope-open-text w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">
+                        Pesan Masuk
+                    </span>
+                </a>
                 <a href="{{ route('profile.show') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
                      {{ request()->routeIs('profile.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
