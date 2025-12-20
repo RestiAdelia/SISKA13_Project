@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\KegiatanController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MouController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TugasController;
+
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
@@ -92,5 +94,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/pesan/{contact}', [ContactController::class, 'destroy'])
         ->name('pesan.destroy');
+});
+
+Route::get('/test-email', function () {
+    Mail::raw('Tes Email dari Laravel', function ($message) {
+        $message->to('sdnsiska13@gmail.com')
+            ->subject('Tes Email');
+    });
+
+    return 'Email terkirim';
 });
 require __DIR__ . '/auth.php';

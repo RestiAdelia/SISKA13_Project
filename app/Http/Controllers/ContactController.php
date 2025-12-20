@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
@@ -12,15 +14,24 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // 1. Validasi input
+        $data = $request->validate([
             'name'    => 'required|string|max:255',
-            'email'   => 'required|email',
+            'email'   => 'required|email|max:255',
             'message' => 'required|string',
         ]);
 
-        Contact::create($request->only('name', 'email', 'message'));
+        // 2. Simpan ke database
+        Contact::create($data);
 
-        return back()->with('success', 'Pesan berhasil dikirim!');
+        // 3. Kirim email ke admin (Gmail)
+        Mail::to('sdnsiska13@gmail.com')
+            ->send(new ContactMail($data));
+
+        // 4. Kembali ke halaman dengan pesan sukses dan scroll ke form
+        return back()
+            ->with('success', 'Pesan berhasil dikirim!')
+            ->withFragment('kontak'); // Tambahkan ini
     }
 
     /**

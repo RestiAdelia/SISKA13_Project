@@ -254,7 +254,7 @@
                         </div>
                     </div>
                     <!-- Kolom Kontak -->
-                    <div class="col-lg-6 d-flex">
+                    <div class="col-lg-6 d-flex" id="kontak">
                         <div class="card flex-fill border-0 p-4">
                             <h4 class="mb-3 text-center">Hubungi Kami</h4>
                             @if (session('success'))
