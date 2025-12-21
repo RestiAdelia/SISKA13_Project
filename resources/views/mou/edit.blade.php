@@ -1,14 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-extrabold text-3xl text-gray-900 leading-tight">
-                Edit Data MoU
+     <x-slot name="header">
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Edit Data MoU') }}
             </h2>
-
-            <a href="{{ route('mou.index') }}"
-               class="px-5 py-2 bg-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-300 transition duration-150">
-                ← Kembali
-            </a>
         </div>
     </x-slot>
 

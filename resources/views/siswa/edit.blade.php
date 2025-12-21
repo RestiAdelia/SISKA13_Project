@@ -1,11 +1,11 @@
 <x-app-layout>
-    {{-- Menggunakan warna aksen dari form sebelumnya: #560029 (Deep Maroon/Violet) --}}
-
+   
     <x-slot name="header">
-        <h2 class="font-extrabold text-4xl text-gray-800 leading-tight tracking-wide">
-            <i class="fas fa-user-edit mr-3 text-[#560029]"></i>
-            Edit Data Siswa: <span class="text-gray-600">{{ $siswa->nama_siswa }}</span>
-        </h2>
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Edit Data Siswa') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">

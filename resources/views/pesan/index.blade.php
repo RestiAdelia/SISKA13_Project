@@ -1,10 +1,11 @@
 <x-app-layout>
     @include('components.alert-success')
-
-    <x-slot name="header">
-        <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
-            {{ __('Pesan Masuk') }}
-        </h2>
+   <x-slot name="header">
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Pesan Masuk') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="p-6 bg-gray-50 min-h-screen" x-data="{ search: '', expandedId: null }">
@@ -85,12 +86,15 @@
 
                                     {{-- Hapus --}}
                                     <form action="{{ route('pesan.destroy', $item) }}" method="POST"
-                                        class="delete-form inline-block">
+                                        class="delete-form inline-block"> {{-- 1. Hapus onsubmit --}}
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Hapus pesan ini?')"
-                                            class="px-3 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition text-xs font-medium flex items-center gap-1"
-                                            title="Hapus pesan">
+
+                                        <button type="button" {{-- 2. Ganti type="submit" jadi "button" --}}
+                                            class="btn-delete px-4 py-2 bg-red-600 hover:bg-red-800 text-white rounded-xl shadow-lg shadow-red-500/20 transition-all duration-300 text-xs font-bold flex items-center gap-2"
+                                            title="Hapus pesan"> {{-- 3. Tambah class btn-delete --}}
+
+                                            <!-- SVG Icon Sampah -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -99,6 +103,7 @@
                                             Hapus
                                         </button>
                                     </form>
+
                                 </div>
                             </td>
                         </tr>

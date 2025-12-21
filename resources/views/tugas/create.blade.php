@@ -1,16 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <h2 class="font-bold text-2xl md:text-3xl text-gray-800 leading-tight">
-                {{ __('Buat Tugas Baru') }}
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Data Tugas') }}
             </h2>
-            <nav class="flex" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-3 text-sm text-gray-500">
-                    <li><a href="#" class="hover:text-[#560029] transition-colors">Dashboard</a></li>
-                    <li>/</li>
-                    <li class="font-medium text-gray-900">Pilih Mapel</li>
-                </ol>
-            </nav>
         </div>
     </x-slot>
 

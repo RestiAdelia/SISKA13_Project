@@ -1,9 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-extrabold text-4xl text-gray-800 leading-tight tracking-wide">
-            <i class="fas fa-user-plus mr-3 text-indigo-600"></i>
-            Tambah Data Siswa
-        </h2>
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Tambah Data Siswa') }}
+            </h2>
+        </div>
     </x-slot>
     <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">

@@ -14,19 +14,94 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
+        
+    .btn-login-custom {
+        background-color: var(--dark3) !important;
+        color: white !important;
+        border: 2px solid var(--dark3) !important;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        transition: all 0.3s ease-in-out;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .bg-section-light {
-            background-color: #ffffff;
-        }
 
-        .bg-section-dark {
-            background-color: #fbeaf0;
-        }
+    
+  
+    .hero-content {
+      
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
 
-        section {
-            padding-top: 60px;
-            padding-bottom: 60px;
-        }
+    .btn-hero-pill {
+        background: var(--mid);
+        color: var(--dark1);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        border-radius: 100px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: inline-block;
+        font-size: 0.9rem;
+        border: 2px solid transparent;
+    }
+
+    .btn-hero-pill:hover {
+        background: white;
+        color: var(--dark1);
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
+        border-color: var(--mid);
+    }
+
+    @keyframes fadeDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .profile-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .profile-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(66, 5, 22, 0.1) !important;
+    }
+
+    .custom-list li {
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .italic-text {
+        position: relative;
+        padding: 5px 0;
+    }
+    
+     .section-title {
+        display: inline-block; /* Agar lebar elemen mengikuti panjang teks */
+        position: relative;
+        padding-bottom: 15px; /* Ruang untuk garis */
+        color: var(--dark1);
+        font-weight: 700;
+    }
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%; /* Letakkan di tengah teks */
+        transform: translateX(-50%); /* Geser ke kiri 50% agar benar-benar presisi di tengah */
+        width: 60px; /* Panjang garis */
+        height: 4px; /* Tebal garis */
+        background-color: var(--mid); /* Gunakan variabel warna Anda */
+        border-radius: 10px;
+    }
 
         .navbar {
             background: transparent;
@@ -183,8 +258,8 @@
             color: white;
             transform: scale(1.05);
         }
-
-  .circle {
+/* 1. Animasi Dasar Lingkaran */
+.circle {
     width: 90px;
     height: 90px;
     border: 3px solid var(--dark3);
@@ -194,34 +269,53 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek membal (bounce) */
     cursor: pointer;
-  }
+    position: relative;
+    z-index: 2;
+}
 
-  .ekskul-logo {
+/* 2. Efek Hover pada Lingkaran */
+.ekskul-item:hover .circle {
+    background-color: var(--mid);
+    border-color: var(--dark2);
+    transform: scale(1.15) rotate(5deg); /* Membesar dan sedikit miring */
+    box-shadow: 0 10px 20px rgba(66, 5, 22, 0.2);
+}
+
+/* Animasi Ikon di dalam Lingkaran */
+.ekskul-logo {
     max-width: 60%;
     max-height: 60%;
     object-fit: contain;
-  }
+    transition: transform 0.3s ease;
+}
 
-  /* Bubble Tooltip */
-  .bubble {
+.ekskul-item:hover .ekskul-logo {
+    transform: scale(1.1); /* Ikon ikut membesar sedikit */
+}
+
+/* 3. Animasi Bubble (Tooltip) */
+.bubble {
     position: absolute;
-    bottom: 110%;
+    bottom: 100%; /* Posisi awal di atas lingkaran */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(10px); /* Mulai agak ke bawah */
     background-color: var(--dark3);
     color: white;
-    padding: 6px 12px;
+    padding: 6px 15px;
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     white-space: nowrap;
-    opacity: 0;
+    opacity: 0; /* Sembunyi di awal */
     pointer-events: none;
-    transition: all 0.3s ease;
-  }
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
 
-  .bubble::after {
+/* Segitiga kecil di bawah bubble */
+.bubble::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -230,16 +324,19 @@
     border-width: 6px;
     border-style: solid;
     border-color: var(--dark3) transparent transparent transparent;
-  }
+}
 
-  .ekskul-item:hover .bubble {
+/* Munculkan Bubble saat Hover */
+.ekskul-item:hover .bubble {
     opacity: 1;
-  }
+    transform: translateX(-50%) translateY(-15px); /* Bergerak naik perlahan */
+}
 
-  .ekskul-item:hover .circle {
-    background-color: var(--mid);
-    border-color: var(--dark2);
-  }
+/* Penyesuaian Layout Item */
+.ekskul-item {
+    width: fit-content;
+    padding: 20px 0;
+}
         /* Section Titles */
         .section-title {
             font-weight: 700;
@@ -288,65 +385,14 @@
             color: var(--gray);
         }
 
-        /* === Section Kepala Sekolah === */
-        #kepsek {
-            background: linear-gradient(135deg, var(--light) 0%, #fff 100%);
-        }
-
-        #kepsek .section-title {
-            color: var(--dark2);
-            font-weight: 700;
-            font-size: 2rem;
-            position: relative;
-        }
-
-        #kepsek .section-title::after {
-            content: "";
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--dark3);
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
-        }
-
-        /* Foto bulat dengan border */
-        .kepsek-foto {
-            max-width: 250px;
-            border-radius: 50%;
-            border: 6px solid var(--mid);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .kepsek-foto:hover {
-            transform: scale(1.05);
-        }
-
-        /* Nama & Jabatan */
-        .kepsek-nama {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark3);
-        }
-
-        .kepsek-jabatan {
-            font-size: 1rem;
-            color: var(--gray);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Quote */
-        .kepsek-quote {
-            font-size: 1.2rem;
-            font-style: italic;
-            line-height: 1.6;
-            color: var(--dark1);
-            padding-left: 1rem;
-            border-left: 4px solid var(--mid);
-        }
+     
+    .kepsek-foto {
+        transition: all 0.4s ease;
+    }
+    .kepsek-container:hover .kepsek-foto {
+        transform: scale(1.02) rotate(-2deg);
+        border-color: var(--light) !important;
+    }
 
         #staf-guru .filter-wrapper {
             display: flex;
@@ -370,36 +416,195 @@
             font-weight: 600;
         }
 
-        /* Cards */
-        #staf-guru .card {
 
-            border-radius: 1rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
+.staf-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.05);
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 2rem 1.5rem !important;
+}
 
-        #staf-guru .card:hover {
-            transform: scale(1.03);
-        }
-
-        /* Gaya untuk gambar guru */
-        .guru-img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid var(--mid);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Efek saat hover */
-        .guru-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-        }
+.staf-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(66, 5, 22, 0.1);
+    border-color: var(--mid);
+}
 
 
+.staf-img-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 1.2rem;
+}
+
+.guru-img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%; /* Tetap Bulat */
+    border: 4px solid #fff; 
+    outline: 2px solid var(--light); 
+    transition: all 0.4s ease;
+}
+
+.staf-card:hover .guru-img {
+    outline-color: var(--mid); 
+    transform: scale(1.05); 
+    box-shadow: 0 5px 15px rgba(239, 136, 173, 0.2);
+}
+
+.staf-info {
+    width: 100%;
+    text-align: center; 
+}
+
+.staf-nama {
+    color: var(--dark1);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.staf-jabatan {
+    color: var(--gray);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+
+.staf-divider {
+    width: 30px;
+    height: 3px;
+    background: var(--mid);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    margin: 0 auto 10px auto; 
+}
+
+.staf-card:hover .staf-divider {
+    width: 60px;
+}
+
+/* Responsif untuk layar HP */
+@media (max-width: 576px) {
+    .guru-img {
+        width: 90px;
+        height: 90px;
+    }
+    .staf-nama {
+        font-size: 1rem;
+    }
+}
+
+.kegiatan-card {
+    border-radius: 20px; 
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background: #ffffff;
+}
+
+.kegiatan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(66, 5, 22, 0.12) !important;
+}
+
+.kegiatan-img-wrapper {
+    height: 240px;
+    overflow: hidden;
+}
+
+.kegiatan-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.kegiatan-card:hover .kegiatan-img {
+    transform: scale(1.1); /* Efek zoom gambar saat hover */
+}
+
+/* Floating Date Badge */
+.date-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--dark3); /* Menggunakan warna maroon Anda */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.date-badge .day {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.date-badge .month {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* Card Title */
+.kegiatan-title {
+    color: var(--dark1);
+    font-weight: 700;
+    font-size: 1.15rem;
+    /* Limit text to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 2.8rem;
+    transition: color 0.3s ease;
+}
+
+.kegiatan-card:hover .kegiatan-title {
+    color: var(--mid); /* Berubah jadi pink saat hover */
+}
+
+/* Overlay Effect */
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(66, 5, 22, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.kegiatan-card:hover .img-overlay {
+    opacity: 1;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .kegiatan-img-wrapper {
+        height: 200px;
+    }
+}
         #lokasi-kontak {
             padding: 3rem 0;
         }
@@ -481,7 +686,100 @@
             color: var(--dark2);
             transform: scale(1.02);
         }
+        /* Pastikan Judul Rata Kiri */
+.text-start .section-title::after {
+    margin-left: 0;
+    margin-right: auto;
+}
 
+/* Card Wrapper */
+.ekskul-card {
+    transition: transform 0.3s ease;
+}
+
+/* Lingkaran Ekskul */
+.ekskul-circle {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 3px solid #fff;
+    outline: 2px solid rgba(239, 136, 173, 0.2); /* Outline pink tipis */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.ekskul-img {
+    max-width: 60%;
+    max-height: 60%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    filter: grayscale(20%);
+}
+
+/* Efek Hover pada Card */
+.ekskul-card:hover .ekskul-circle {
+    transform: scale(1.1) rotate(5deg);
+    outline-color: var(--mid);
+    box-shadow: 0 10px 20px rgba(66, 5, 22, 0.1) !important;
+}
+
+.ekskul-card:hover .ekskul-img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* Nama Ekskul di Bawah */
+.ekskul-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--dark2);
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+.ekskul-card:hover .ekskul-name {
+    color: var(--dark3);
+}
+
+/* Bubble Tooltip (Muncul Saat Hover) */
+.ekskul-bubble {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: var(--dark3);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 5;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ekskul-card:hover .ekskul-bubble {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-35px); /* Bergerak naik sedikit */
+}
+
+/* Responsif Mobile */
+@media (max-width: 576px) {
+    .ekskul-circle {
+        width: 80px;
+        height: 80px;
+    }
+    .ekskul-name {
+        font-size: 0.8rem;
+    }
+}
         .footer-modern {
             background-color: var(--dark2);
         }
