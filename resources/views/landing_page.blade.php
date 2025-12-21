@@ -254,25 +254,37 @@
                         </div>
                     </div>
                     <!-- Kolom Kontak -->
-                    <div class="col-lg-6 d-flex">
+                    <div class="col-lg-6 d-flex" id="kontak">
                         <div class="card flex-fill border-0 p-4">
                             <h4 class="mb-3 text-center">Hubungi Kami</h4>
-                            <form>
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <form action="{{ route('contact.store') }}" method="POST">
+                                @csrf
+
                                 <div class="mb-3">
                                     <label class="form-label">Nama</label>
-                                    <input type="text" class="form-control" placeholder="Masukkan nama anda"
-                                        required>
+                                    <input type="text" name="name" class="form-control"
+                                        placeholder="Masukkan nama anda" required>
                                 </div>
+
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" placeholder="Masukkan email anda"
-                                        required>
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Masukkan email anda" required>
                                 </div>
+
                                 <div class="mb-3">
                                     <label class="form-label">Pesan</label>
-                                    <textarea class="form-control" rows="4" placeholder="Tulis pesan anda..." required></textarea>
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Tulis pesan anda..." required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success w-100">Kirim Pesan</button>
+
+                                <button type="submit" class="btn btn-success w-100">
+                                    Kirim Pesan
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -364,7 +376,8 @@
                         } else {
                             item.style.display = 'none';
                         }
-                    });z
+                    });
+                    z
                 });
             });
         });
