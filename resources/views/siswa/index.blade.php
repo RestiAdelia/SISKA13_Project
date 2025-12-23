@@ -64,12 +64,14 @@
                     </form>
 
                     {{-- Tombol Tambah --}}
+                     @if(Auth::user()->role !== 'orangtua')
                     <div class="w-full lg:w-auto flex justify-end">
                         <a href="{{ route('siswa.create') }}"
                             class="inline-flex items-center justify-center px-5 py-2.5 bg-[#560029] hover:bg-[#3f0020] text-white text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 focus:ring-2 focus:ring-offset-2 focus:ring-[#560029]">
                             <i class="fa-solid fa-user-plus mr-2"></i> Tambah Siswa
                         </a>
                     </div>
+                    @endif
                 </div>
 
                 {{-- Tabel --}}
@@ -82,7 +84,9 @@
                                 <th class="px-6 py-4 font-bold">NIPD</th>
                                 <th class="px-6 py-4 font-bold">NISN</th>
                                 <th class="px-6 py-4 font-bold text-center">L/P</th>
+                                 @if(Auth::user()->role !== 'orangtua')
                                 <th class="px-6 py-4 font-bold text-center w-40">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -116,12 +120,14 @@
                                         @endif
                                     </td>
 
+                                      @if(Auth::user()->role !== 'orangtua')
                                     <td class="px-6 py-4">
                                         <div class="flex items-center justify-center gap-2">
                                             <a href="{{ route('siswa.show', $s->id) }}"
                                                 class="w-8 h-8 flex items-center justify-center rounded-lg text-blue-500 hover:bg-blue-50 hover:text-blue-700 transition">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
+
 
                                             <a href="{{ route('siswa.edit', $s->id) }}"
                                                 class="w-8 h-8 flex items-center justify-center rounded-lg text-amber-500 hover:bg-amber-50 hover:text-amber-600 transition">
@@ -136,6 +142,7 @@
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </button>
                                             </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -165,5 +172,5 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
 
-  
+
 </x-app-layout>
