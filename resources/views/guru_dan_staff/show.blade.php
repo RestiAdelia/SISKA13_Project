@@ -84,11 +84,14 @@
                     </div>
 
                     {{-- Tombol Aksi --}}
+
                     <div class="mt-10 flex justify-end gap-3">
+                         @if(Auth::user()->role !== 'orangtua')
                         <a href="{{ route('guru_dan_staff.edit', $guruDanStaff->id) }}"
                             class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                             Edit Data
                         </a>
+                        @endif
                         {{-- tombol kembalo --}}
                         <a href="{{ route('guru_dan_staff.index') }}"
                             class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-white-700 transition">
@@ -97,6 +100,7 @@
 
 
                     </div>
+
                 </div>
             </div>
         </div>

@@ -34,20 +34,23 @@
                     <span class="whitespace-nowrap hidden md:group-hover:block">Dashboard</span>
                 </a>
 
-                <a href="{{ route('visi-misi.index') }}"
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+                @if (Auth::user()->role !== 'orangtua')
+                    <a href="{{ route('visi-misi.index') }}"
+                        class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
                    {{ request()->routeIs('visi-misi.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
-                    <i class="fa-solid fa-school w-6 text-lg text-center"></i>
-                    <span class="whitespace-nowrap hidden md:group-hover:block">Visi Misi</span>
-                </a>
+                        <i class="fa-solid fa-school w-6 text-lg text-center"></i>
+                        <span class="whitespace-nowrap hidden md:group-hover:block">Visi Misi</span>
+                    </a>
+                @endif
 
-                <a href="{{ route('guru_dan_staff.index') }}"
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+                @if (Auth::user()->role !== 'orangtua')
+                    <a href="{{ route('guru_dan_staff.index') }}"
+                        class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
                   {{ request()->routeIs('guru_dan_staff.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
-                    <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
-                    <span class="whitespace-nowrap hidden md:group-hover:block">Data Guru & Staf</span>
-                </a>
-
+                        <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
+                        <span class="whitespace-nowrap hidden md:group-hover:block">Data Guru & Staf</span>
+                    </a>
+                @endif
                 <a href="{{ route('siswa.index') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
                      {{ request()->routeIs('siswa.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
@@ -61,18 +64,22 @@
                     <i class="fa-solid fa-book w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Kelas</span>
                 </a>
-                <a href="{{ route('kegiatan.index') }}"
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+                @if (Auth::user()->role !== 'orangtua')
+                    <a href="{{ route('kegiatan.index') }}"
+                        class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
                     {{ request()->routeIs('kegiatan.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
-                    <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
-                    <span class="whitespace-nowrap hidden md:group-hover:block">Kegiatan</span>
-                </a>
-                <a href="{{ route('mou.index') }}"
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+                        <i class="fa-solid fa-chalkboard-teacher w-6 text-lg text-center"></i>
+                        <span class="whitespace-nowrap hidden md:group-hover:block">Kegiatan</span>
+                    </a>
+                @endif
+                @if (Auth::user()->role !== 'orangtua')
+                    <a href="{{ route('mou.index') }}"
+                        class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
                      {{ request()->routeIs('mou.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
-                    <i class="fa-solid fa-file-signature w-6 text-lg text-center"></i>
-                    <span class="whitespace-nowrap hidden md:group-hover:block">MoU</span>
-                </a>
+                        <i class="fa-solid fa-file-signature w-6 text-lg text-center"></i>
+                        <span class="whitespace-nowrap hidden md:group-hover:block">MoU</span>
+                    </a>
+                @endif
 
 
                 <a href="#"
@@ -82,7 +89,7 @@
                 </a>
                 <a href="{{ route('tugas.index') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
-                   <i class="fa-solid fa-tasks w-6 text-lg text-center"></i>
+                    <i class="fa-solid fa-tasks w-6 text-lg text-center"></i>
 
                     <span class="whitespace-nowrap hidden md:group-hover:block">Tugas Siswa</span>
                 </a>

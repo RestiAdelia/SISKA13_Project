@@ -15,11 +15,11 @@
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            
+
             {{-- KOLOM KIRI: FOTO PROFIL (50%) --}}
             <div class="lg:col-span-1 flex flex-col items-center">
                 {{-- PERUBAHAN DI SINI: w-48 h-48 diubah menjadi w-64 h-64 --}}
-                <div class="relative w-64 h-64 mb-6"> 
+                <div class="relative w-64 h-64 mb-6">
                     <img id="preview-image"
                         src="{{ Auth::user()->profile_photo_url ?? 'https://via.placeholder.com/200' }}"
                         alt="Foto Profil"
@@ -36,10 +36,10 @@
                 <x-input-error class="mt-4 text-center" :messages="$errors->get('photo')" />
                 <p class="text-sm text-gray-500 mt-2">Format: JPG, PNG. Max: 2MB</p>
             </div>
-            
+
             {{-- KOLOM KANAN: FORM DATA DIRI (50%) --}}
-            <div class="lg:col-span-1 space-y-6"> 
-                
+            <div class="lg:col-span-1 space-y-6">
+
                 {{-- Nama --}}
                 <div>
                     <x-input-label for="name" :value="__('Nama Lengkap')" />
@@ -50,6 +50,7 @@
                 </div>
 
                 {{-- Email --}}
+                 @if(Auth::user()->role !== 'orangtua')
                 <div>
                     <x-input-label for="email" :value="__('Alamat Email')" />
                     <x-text-input id="email" name="email" type="email"
@@ -69,6 +70,7 @@
                         </div>
                     @endif
                 </div>
+                @endif
 
                 {{-- Alamat --}}
                 <div>
@@ -89,16 +91,19 @@
                 </div>
             </div>
         </div>
-        
+
         {{-- Tombol Aksi --}}
         <div class="flex flex-col sm:flex-row justify-end gap-4 mt-10 pt-6 border-t border-gray-100">
 
+
             {{-- Ganti Password --}}
+             @if(Auth::user()->role !== 'orangtua')
             <a href="{{ route('password.requestOtpForm') }}"
                 class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-2.5 rounded-xl shadow-sm transition duration-300 flex items-center justify-center">
                 <i class="fas fa-lock mr-2"></i> Ganti Password
             </a>
-            
+            @endif
+
             {{-- Cancel --}}
             <a href="{{ route('dashboard') }}"
                 class="border border-gray-300 text-gray-700 font-semibold px-6 py-2.5 rounded-xl hover:bg-gray-50 transition duration-300 flex items-center justify-center">

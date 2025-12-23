@@ -180,11 +180,13 @@
                     </div>
 
                     {{-- Kartu Aksi --}}
+                     @if(Auth::user()->role !== 'orangtua')
                     <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                         <h4 class="font-bold text-gray-800 mb-4">Aksi Admin</h4>
                         <div class="flex justify-center items-center gap-3">
 
                             {{-- Tombol Edit --}}
+
                             <a href="{{ route('tugas.edit', $tugas->id) }}"
                                 class="flex items-center justify-center w-8 h-8 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition shadow-sm">
                                 <i class="fa-solid fa-pen-to-square"></i>
@@ -199,6 +201,7 @@
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </form>
+                            @endif
 
                             {{-- Tombol Kembali --}}
                             <a href="{{ route('tugas.index') }}"
