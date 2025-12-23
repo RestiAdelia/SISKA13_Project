@@ -93,7 +93,14 @@
 
                     <span class="whitespace-nowrap hidden md:group-hover:block">Tugas Siswa</span>
                 </a>
-
+                <a href="{{ route('pesan.index') }}"
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
+                    {{ request()->routeIs('pesan.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
+                    <i class="fa-solid fa-envelope-open-text w-6 text-lg text-center"></i>
+                    <span class="whitespace-nowrap hidden md:group-hover:block">
+                        Pesan Masuk
+                    </span>
+                </a>
                 <a href="{{ route('profile.show') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
                      {{ request()->routeIs('profile.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
@@ -109,13 +116,11 @@
         <div class="flex-1 flex flex-col">
             <!-- Header -->
             <header class="flex items-center justify-between bg-white px-6 py-3 shadow">
-                <h1 class="font-bold text-lg">Dashboard</h1>
+                <h1 class="font-bold text-lg text-gray-800">
+                    {{ $header ?? 'Dashboard' }}
+                </h1>
                 <div class="flex items-center space-x-4">
-                    <!-- Search -->
-                    <div>
-                        <input type="text" placeholder="Cari data..."
-                            class="px-3 py-2 border rounded-md w-64 focus:outline-none focus:ring focus:ring-pink-300">
-                    </div>
+
                     <!-- User Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="flex items-center space-x-2 focus:outline-none">

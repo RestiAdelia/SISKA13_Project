@@ -1,13 +1,13 @@
 <x-app-layout>
-     @include('components.alert-success');
+    @include('components.alert-success')
     {{-- Header Section --}}
     <x-slot name="header">
-        <h2 class="font-extrabold text-3xl text-gray-900 leading-tight">
-            Data MoU
-        </h2>
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Data MoU') }}
+            </h2>
+        </div>
     </x-slot>
-
-
     <div class="p-6 bg-gray-50 min-h-screen" x-data="{ searchTerm: '' }">
 
         {{-- notif succes --}}

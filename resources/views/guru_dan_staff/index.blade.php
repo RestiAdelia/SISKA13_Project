@@ -1,10 +1,14 @@
 <x-app-layout>
-     @include('components.alert-success');
-    <x-slot name="header">
-        <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
-            {{ __('Data Guru dan Staff') }}
-        </h2>
+     @include('components.alert-success')
+
+     <x-slot name="header">
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Data Staf & Guru') }}
+            </h2>
+        </div>
     </x-slot>
+
 
     <div class="p-6 bg-gray-50 min-h-screen" x-data="{ search: '' }">
 

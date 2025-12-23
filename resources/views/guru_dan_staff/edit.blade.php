@@ -1,162 +1,154 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
-            {{ __('Edit Data Guru dan Staff') }}
-        </h2>
+   <x-slot name="header">
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Edit Staf & Guru') }}
+            </h2>
+        </div>
     </x-slot>
 
-    <div class="container mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6">Edit Guru / Staf</h2>
+    <div class="py-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+        <div class="max-w-5xl mx-auto bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
 
-        <form action="{{ route('guru_dan_staff.update', $item->id) }}" method="POST" enctype="multipart/form-data"
-            class="bg-white p-6 rounded shadow-md space-y-4">
-            @csrf
-            @method('PUT')
-
-            <div class="grid grid-cols-2 gap-4">
-
-                {{-- NIP --}}
-                <div>
-                    <label class="block text-gray-700">NIP</label>
-                    <input type="text" name="nip" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->nip }}">
-                </div>
-
-                {{-- Nama --}}
-                <div>
-                    <label class="block text-gray-700">Nama</label>
-                    <input type="text" name="nama" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->nama }}" required>
-                </div>
-
-                {{-- Tempat Lahir --}}
-                <div>
-                    <label class="block text-gray-700">Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->tempat_lahir }}">
-                </div>
-
-                {{-- Tanggal Lahir --}}
-                <div>
-                    <label class="block text-gray-700">Tanggal Lahir</label>
-                    <input type="date" name="tanggal_lahir" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->tanggal_lahir ? \Carbon\Carbon::parse($item->tanggal_lahir)->format('Y-m-d') : '' }}">
-                </div>
-
-                {{-- Jenis Kelamin --}}
-                <div>
-                    <label class="block text-gray-700">Jenis Kelamin</label>
-                    <select name="jenis_kelamin" class="w-full border border-gray-300 rounded px-3 py-2">
-                        <option value="">-- Pilih --</option>
-                        <option value="L" {{ $item->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                        <option value="P" {{ $item->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
-                    </select>
-                </div>
-
-                {{-- Karpeg --}}
-                <div>
-                    <label class="block text-gray-700">Karpeg</label>
-                    <input type="text" name="karpeg" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->karpeg }}">
-                </div>
-
-                {{-- NUPTK --}}
-                <div>
-                    <label class="block text-gray-700">NUPTK</label>
-                    <input type="text" name="nuptk" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->nuptk }}">
-                </div>
-
-                {{-- NPWP --}}
-                <div>
-                    <label class="block text-gray-700">NPWP</label>
-                    <input type="text" name="npwp" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->npwp }}">
-                </div>
-
-                {{-- Pangkat / Golongan --}}
-                <div>
-                    <label class="block text-gray-700">Pangkat/Golongan</label>
-                    <input type="text" name="pangkat_golongan"
-                        class="w-full border border-gray-300 rounded px-3 py-2" value="{{ $item->pangkat_golongan }}">
-                </div>
-
-                {{-- SK Pangkat Terakhir --}}
-                <div>
-                    <label class="block text-gray-700">SK Pangkat Terakhir</label>
-                    <input type="text" name="sk_pangkat_terakhir"
-                        class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->sk_pangkat_terakhir }}">
-                </div>
-
-                {{-- Jabatan --}}
-                <div>
-                    <label class="block text-gray-700">Jabatan</label>
-                    <input type="text" name="jabatan" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->jabatan }}">
-                </div>
-
-                {{-- Pendidikan Terakhir --}}
-                <div>
-                    <label class="block text-gray-700">Pendidikan Terakhir</label>
-                    <input type="text" name="pendidikan_terakhir"
-                        class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->pendidikan_terakhir }}">
-                </div>
-
-                {{-- TMT KGB Terakhir --}}
-                <div>
-                    <label class="block text-gray-700">TMT KGB Terakhir</label>
-                    <input type="date" name="tmt_kgb_terakhir"
-                        class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->tmt_kgb_terakhir ? \Carbon\Carbon::parse($item->tmt_kgb_terakhir)->format('Y-m-d') : '' }}">
-                </div>
-
-                {{-- Sertifikasi --}}
-                <div>
-                    <label class="block text-gray-700">Sertifikasi</label>
-                    <input type="text" name="sertifikasi" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->sertifikasi }}">
-                </div>
-
-                {{-- TMT Bertugas --}}
-                <div>
-                    <label class="block text-gray-700">TMT Bertugas</label>
-                    <input type="date" name="tmt_bertugas" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->tmt_bertugas ? \Carbon\Carbon::parse($item->tmt_bertugas)->format('Y-m-d') : '' }}">
-                </div>
-
-                {{-- Alamat --}}
-                <div class="col-span-2">
-                    <label class="block text-gray-700">Alamat</label>
-                    <textarea name="alamat" class="w-full border border-gray-300 rounded px-3 py-2" rows="3">{{ $item->alamat }}</textarea>
-                </div>
-
-                {{-- Rencana Pensiun --}}
-                <div>
-                    <label class="block text-gray-700">Rencana Pensiun</label>
-                    <input type="date" name="rencana_pensiun" class="w-full border border-gray-300 rounded px-3 py-2"
-                        value="{{ $item->rencana_pensiun ? \Carbon\Carbon::parse($item->rencana_pensiun)->format('Y-m-d') : '' }}">
-                </div>
-
-                {{-- Foto --}}
-                <div>
-                    <label class="block text-gray-700">Foto</label>
-                    @if ($item->foto)
-                        <img src="{{ asset('uploads/' . $item->foto) }}" alt="Foto"
-                            class="w-20 h-20 object-cover rounded mb-2">
-                    @endif
-                    <input type="file" name="foto" class="w-full border border-gray-300 rounded px-3 py-2"
-                        accept="image/*">
-                </div>
+            {{-- Judul dengan Gaya yang Sama (Garis di tengah bawah) --}}
+            <div class="mb-10 text-center md:text-left">
+                <h2 class="relative inline-block pb-3 text-2xl font-bold text-gray-800">
+                    Perbarui Profil Guru / Staf
+                    <span class="absolute bottom-0 left-1/2 md:left-0 md:translate-x-0 -translate-x-1/2 w-16 h-1 bg-[#4a0000] rounded-full"></span>
+                </h2>
             </div>
 
-            <div class="mt-4">
-                <button type="submit"
-                    class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Update</button>
-                <a href="{{ route('guru_dan_staff.index') }}"
-                    class="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 transition">Batal</a>
-            </div>
-        </form>
+            <form action="{{ route('guru_dan_staff.update', $item->id) }}" method="POST" enctype="multipart/form-data"
+                class="space-y-6">
+                @csrf
+                @method('PUT')
+
+                @php
+                    // Variabel class input agar seragam: Fokus Hitam & Ring Maroon Gelap
+                    $inputClass = "w-full border-gray-300 rounded-lg shadow-sm px-4 py-2 transition-all duration-300 
+                                   focus:border-black focus:ring-2 focus:ring-[#4a0000] focus:ring-opacity-50 outline-none";
+                @endphp
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    {{-- NIP --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">NIP</label>
+                        <input type="text" name="nip" value="{{ $item->nip }}" class="{{ $inputClass }}">
+                    </div>
+
+                    {{-- Nama --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nama Lengkap</label>
+                        <input type="text" name="nama" value="{{ $item->nama }}" class="{{ $inputClass }}" required>
+                    </div>
+
+                    {{-- Tempat Lahir --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Tempat Lahir</label>
+                        <input type="text" name="tempat_lahir" value="{{ $item->tempat_lahir }}" class="{{ $inputClass }}">
+                    </div>
+
+                    {{-- Tanggal Lahir --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" 
+                            value="{{ $item->tanggal_lahir ? \Carbon\Carbon::parse($item->tanggal_lahir)->format('Y-m-d') : '' }}" 
+                            class="{{ $inputClass }}">
+                    </div>
+
+                    {{-- Jenis Kelamin --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" class="{{ $inputClass }}">
+                            <option value="">-- Pilih --</option>
+                            <option value="L" {{ $item->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="P" {{ $item->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
+                        </select>
+                    </div>
+
+                    {{-- Karpeg --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nomor Karpeg</label>
+                        <input type="text" name="karpeg" value="{{ $item->karpeg }}" class="{{ $inputClass }}">
+                    </div>
+
+                    {{-- NUPTK --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">NUPTK</label>
+                        <input type="text" name="nuptk" value="{{ $item->nuptk }}" class="{{ $inputClass }}">
+                    </div>
+
+                    {{-- NPWP --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">NPWP</label>
+                        <input type="text" name="npwp" value="{{ $item->npwp }}" class="{{ $inputClass }}">
+                    </div>
+
+                    {{-- Jabatan --}}
+                   <div>
+    <label class="block text-sm font-bold text-gray-700 mb-1">Jabatan</label>
+    <select name="jabatan" class="{{ $inputClass }}">
+        <option value="">-- Pilih Jabatan --</option>
+        
+        <option value="Kepala Sekolah" {{ old('jabatan', $item->jabatan) == 'Kepala Sekolah' ? 'selected' : '' }}>
+            Kepala Sekolah
+        </option>
+        
+        <option value="Guru" {{ old('jabatan', $item->jabatan) == 'Guru' ? 'selected' : '' }}>
+            Guru
+        </option>
+        
+        <option value="Staf" {{ old('jabatan', $item->jabatan) == 'Staf' ? 'selected' : '' }}>
+            Staf
+        </option>
+        
+    </select>
+</div>
+
+                    {{-- Pendidikan Terakhir --}}
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Pendidikan Terakhir</label>
+                        <input type="text" name="pendidikan_terakhir" value="{{ $item->pendidikan_terakhir }}" class="{{ $inputClass }}">
+                    </div>
+
+                    {{-- Alamat (Full Width) --}}
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Alamat Lengkap</label>
+                        <textarea name="alamat" class="{{ $inputClass }}" rows="3">{{ $item->alamat }}</textarea>
+                    </div>
+
+                    {{-- Foto --}}
+                    <div class="md:col-span-2 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                        <label class="block text-sm font-bold text-gray-700 mb-3">Foto Profil</label>
+                        <div class="flex items-center gap-6">
+                            @if ($item->foto)
+                                <div class="relative">
+                                    <img src="{{ asset('uploads/' . $item->foto) }}" alt="Foto"
+                                        class="w-24 h-24 object-cover rounded-full border-4 border-white shadow-md">
+                                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded-full">Foto Saat Ini</span>
+                                </div>
+                            @endif
+                            <div class="flex-1">
+                                <input type="file" name="foto" class="{{ $inputClass }} file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300" accept="image/*">
+                                <p class="text-xs text-gray-500 mt-2 italic">*Kosongkan jika tidak ingin mengubah foto</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Tombol Aksi --}}
+                <div class="flex justify-end gap-4 pt-8 border-t border-gray-100">
+                    <a href="{{ route('guru_dan_staff.index') }}"
+                        class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition font-semibold">
+                        Batal
+                    </a>
+                    <button type="submit"
+                        class="px-10 py-2 bg-[#4a0000] hover:bg-black text-white rounded-lg font-bold shadow-lg transition-all duration-300">
+                        Update Data
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </x-app-layout>

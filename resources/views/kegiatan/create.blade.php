@@ -1,8 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-bold text-3xl text-[var(--dark2)] leading-tight">
-            {{ __('Kegiatan') }}
-        </h2>
+   <x-slot name="header">
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Data Kegiatan') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-10 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">

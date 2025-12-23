@@ -1,8 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h1 class="font-extrabold text-3xl text-gray-900 leading-tight">
-            <i class="fas fa-id-card-alt mr-3 text-[#560029]"></i> Profil Saya
-        </h1>
+   <x-slot name="header">
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Setting') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-10">

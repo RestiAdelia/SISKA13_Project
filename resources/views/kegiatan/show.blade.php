@@ -32,7 +32,7 @@
             <!-- Tombol Kembali -->
             <div class="mt-8">
                 <a href="{{ url('/#kegiatan') }}"
-                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300">
+                    class="inline-block bg-[#800000] hover:bg-[#600000] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300">
                     ← Kembali ke Beranda
                 </a>
             </div>
