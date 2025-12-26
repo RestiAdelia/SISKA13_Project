@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Siswa extends Model
 {
-      protected $table = 'siswa';
-     protected $fillable = [
+    protected $table = 'siswa';
+    protected $fillable = [
         'nama_siswa',
         'nipd',
         'nisn',
@@ -21,8 +21,16 @@ class Siswa extends Model
         'tahun_ajar',
     ];
 
-       public function kelas()
+    public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
+    public function absens()
+    {
+        return $this->hasMany(Absen::class, 'siswa_id');
+    }
+
+
+
+
 }
