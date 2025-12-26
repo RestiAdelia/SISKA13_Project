@@ -27,6 +27,7 @@
                 <input type="text" x-model="search" placeholder="🔍 Cari nama, NIP, atau jabatan..."
                     class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700">
             </div>
+            @if(Auth::user()->role !== 'orangtua')
             <div>
                 <a href="{{ route('guru_dan_staff.create') }}"
                     class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:scale-105">
@@ -34,6 +35,7 @@
                 </a>
 
             </div>
+            @endif
         </div>
 
         {{-- TABEL DATA --}}
@@ -79,6 +81,7 @@
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
 
+                                @if(Auth :: user ()-> role !== 'orangtua')
                                 {{-- Tombol Edit --}}
                                 <a href="{{ route('guru_dan_staff.edit', $pegawai->id) }}"
                                     class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition inline-flex items-center gap-1">
@@ -93,6 +96,7 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                     @empty

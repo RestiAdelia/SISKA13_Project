@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\VisiMisi;
-use App\Models\Kegiatan;
+use App\Models\Kegiatan; 
 use App\Models\GuruDanStaff;
 
 class LandingPageController extends Controller

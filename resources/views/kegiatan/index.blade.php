@@ -28,10 +28,12 @@
                     class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700">
             </div>
 
+            @if(Auth::user()->role !== 'orangtua')
             <a href="{{ route('kegiatan.create') }}"
                 class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:scale-105">
                 ➕ Tambah Kegiatan
             </a>
+            @endif
 
         </div>
 
@@ -46,7 +48,9 @@
                         <th class="px-4 py-2 border">Deskripsi</th>
                         <th class="px-4 py-2 border">Gambar</th>
                         <th class="px-4 py-2 border">Diupdate Oleh</th>
+                        @if(Auth::user()->role !== 'orangtua')
                         <th class="px-4 py-2 border">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -80,6 +84,7 @@
                                 {{ $item->updated_by ?? 'Belum Ada' }}
                             </td>
 
+                            @if(Auth::user()->role !== 'orangtua')
                             <td class="px-4 py-2 flex justify-center items-center gap-2">
 
                                 {{-- Tombol Edit (Warna Gold/Amber Mewah) --}}
@@ -112,6 +117,7 @@
                                 </form>
 
                             </td>
+                            @endif
                         </tr>
                     @empty
                         <tr>
