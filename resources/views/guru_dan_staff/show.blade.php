@@ -60,37 +60,20 @@
 </div>
                     </div>
 
-                    {{-- SISI DETAIL DATA --}}
-                    <div class="md:col-span-2 p-8 lg:p-12">
-                        
-                        <!-- Informasi Pribadi -->
-                        <div class="mb-10">
-                            <h4 class="text-sm font-bold text-[#800000] uppercase tracking-[2px] mb-6 flex items-center">
-                                <span class="w-8 h-[2px] bg-[#800000] mr-3"></span> Informasi Pribadi
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div class="border-b border-gray-100 pb-2">
-                                    <p class="text-xs text-gray-400 uppercase font-bold">NIP</p>
-                                    <p class="text-gray-800 font-medium">{{ $guruDanStaff->nip ?? '-' }}</p>
-                                </div>
-                                <div class="border-b border-gray-100 pb-2">
-                                    <p class="text-xs text-gray-400 uppercase font-bold">Jenis Kelamin</p>
-                                    <p class="text-gray-800 font-medium">{{ $guruDanStaff->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</p>
-                                </div>
-                                <div class="border-b border-gray-100 pb-2">
-                                    <p class="text-xs text-gray-400 uppercase font-bold">Tempat Lahir</p>
-                                    <p class="text-gray-800 font-medium">{{ $guruDanStaff->tempat_lahir ?? '-' }}</p>
-                                </div>
-                                <div class="border-b border-gray-100 pb-2">
-                                    <p class="text-xs text-gray-400 uppercase font-bold">Tanggal Lahir</p>
-                                    <p class="text-gray-800 font-medium">{{ $guruDanStaff->tanggal_lahir ? \Carbon\Carbon::parse($guruDanStaff->tanggal_lahir)->translatedFormat('d F Y') : '-' }}</p>
-                                </div>
-                                <div class="sm:col-span-2 border-b border-gray-100 pb-2">
-                                    <p class="text-xs text-gray-400 uppercase font-bold">Alamat</p>
-                                    <p class="text-gray-800 font-medium">{{ $guruDanStaff->alamat ?? '-' }}</p>
-                                </div>
-                            </div>
-                        </div>
+                    {{-- Tombol Aksi --}}
+
+                    <div class="mt-10 flex justify-end gap-3">
+                         @if(Auth::user()->role !== 'orangtua')
+                        <a href="{{ route('guru_dan_staff.edit', $guruDanStaff->id) }}"
+                            class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            Edit Data
+                        </a>
+                        @endif
+                        {{-- tombol kembalo --}}
+                        <a href="{{ route('guru_dan_staff.index') }}"
+                            class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-white-700 transition">
+                            ← Kembali
+                        </a>
 
                         <!-- Informasi Kepegawaian -->
                         <div>
@@ -134,6 +117,7 @@
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>

@@ -61,13 +61,15 @@
                     </form>
 
                     {{-- Tombol Tambah --}}
+                    @if(Auth::user()->role !== 'orangtua')
                     <div class="w-full lg:w-auto flex justify-end">
                         <a href="{{ route('kelas.create') }}"
-                            class="inline-flex items-center justify-center px-5 py-2.5 bg-[#560029] hover:bg-[#3f0020] 
+                            class="inline-flex items-center justify-center px-5 py-2.5 bg-[#560029] hover:bg-[#3f0020]
                                    text-white text-sm font-medium rounded-lg shadow-md hover:shadow-lg transition">
                             <i class="fa-solid fa-plus mr-2"></i> Tambah Kelas
                         </a>
                     </div>
+                    @endif
 
                 </div>
 
@@ -81,7 +83,9 @@
                                 <th class="px-6 py-4">Wali Kelas / Guru</th>
                                 <th class="px-6 py-4 text-center">Tahun Ajaran</th>
                                 <th class="px-6 py-4 text-center">Mata Pelajaran</th>
+                                @if(Auth::user()->role !== 'orangtua')
                                 <th class="px-6 py-4 text-center w-32">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
 
@@ -137,7 +141,7 @@
                                         @if (is_array($k->mata_pelajaran) && count($k->mata_pelajaran))
                                             <div class="flex flex-wrap gap-1.5">
                                                 @foreach ($k->mata_pelajaran as $mapel)
-                                                    <span class="px-2 py-1 bg-[#560029]/10 text-[#560029] 
+                                                    <span class="px-2 py-1 bg-[#560029]/10 text-[#560029]
                                                                  rounded-md text-xs border border-[#560029]/20">
                                                         {{ $mapel }}
                                                     </span>
@@ -149,6 +153,7 @@
                                     </td>
 
                                     {{-- Aksi --}}
+                                    @if(Auth::user()->role !== 'orangtua')
                                     <td class="px-6 py-4 text-center">
                                         <a href="{{ route('kelas.edit', $k->id) }}"
                                             class="inline-block text-amber-600 hover:text-amber-700 mr-2">
@@ -164,6 +169,7 @@
                                             </button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
 
                             @empty
