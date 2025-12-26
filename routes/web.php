@@ -72,6 +72,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('siswa', SiswaController::class);
     Route::resource('mou', MouController::class);
     Route::resource('tugas', TugasController::class);
+    Route::resource('absen', App\Http\Controllers\AbsenController::class);
+    // Per-siswa recap and management (edit/update by siswa)
+    Route::get('absen/siswa/{siswa}/edit', [App\Http\Controllers\AbsenController::class, 'editSiswa'])->name('absen.siswa.edit');
+    Route::put('absen/siswa/{siswa}', [App\Http\Controllers\AbsenController::class, 'updateSiswa'])->name('absen.siswa.update');
+
+
+    // Bulk edit routes: edit multiple students at once for a week
+    Route::get('absen/bulk-edit', [App\Http\Controllers\AbsenController::class, 'bulkEdit'])->name('absen.bulk.edit');
+    Route::put('absen/bulk-update', [App\Http\Controllers\AbsenController::class, 'bulkUpdate'])->name('absen.bulk.update');
 });
 
 Route::middleware(['auth'])->group(function () {
