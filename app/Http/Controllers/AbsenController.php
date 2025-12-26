@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class AbsenController extends Controller
 {
-    /**
-     * ===============================
-     * INDEX / REKAP
-     * ===============================
-     */
     public function index(Request $request)
     {
         if ($request->filled('start_date') && $request->filled('end_date')) {

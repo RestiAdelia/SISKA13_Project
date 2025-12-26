@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Absen extends Model
 {
+    // Specify the table name if it doesn't follow Laravel's naming convention
     protected $table = 'absens';
 
     protected $fillable = [
