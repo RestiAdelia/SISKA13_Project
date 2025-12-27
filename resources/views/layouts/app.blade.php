@@ -83,7 +83,8 @@
 
 
                 <a href="{{ route('absen.index') }}"
-                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200">
+                    class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
+                    {{ request()->routeIs('absen.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
                     <i class="fa-solid fa-pen-to-square w-6 text-lg text-center"></i>
                     <span class="whitespace-nowrap hidden md:group-hover:block">Rekap Absen</span>
                 </a>
