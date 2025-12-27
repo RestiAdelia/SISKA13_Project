@@ -93,6 +93,7 @@
 
                     <span class="whitespace-nowrap hidden md:group-hover:block">Tugas Siswa</span>
                 </a>
+                @if (auth()->user()->role !== 'orangtua')
                 <a href="{{ route('pesan.index') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md transition-colors duration-200
                     {{ request()->routeIs('pesan.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">
@@ -101,6 +102,7 @@
                         Pesan Masuk
                     </span>
                 </a>
+                @endif
                 <a href="{{ route('profile.show') }}"
                     class="flex items-center gap-2 px-3 py-2.5 rounded-md hover:bg-white/20 transition-colors duration-200
                      {{ request()->routeIs('profile.*') ? 'bg-white/40 text-yellow-300' : 'hover:bg-white/20' }}">

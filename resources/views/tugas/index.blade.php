@@ -1,5 +1,5 @@
 <x-app-layout>
-    @include('components.alert-success');
+    @include('components.alert-success')
     <x-slot name="header">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <h2 class="font-bold text-2xl md:text-3xl text-gray-800 leading-tight">

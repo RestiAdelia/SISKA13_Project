@@ -5,40 +5,62 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
-  public function index(Request $request)
-{
-    $query = Siswa::with('kelas')
-        ->leftJoin('kelas', 'siswa.kelas_id', '=', 'kelas.id')
-        ->orderByRaw('CAST(REGEXP_REPLACE(LOWER(kelas.nama_kelas), "[^0-9]", "") AS UNSIGNED) ASC')
-        ->select('siswa.*'); 
+    public function index(Request $request)
+    {
+        $user = Auth::user();
 
-    // Filter berdasarkan search
-    if ($request->filled('search')) {
-        $query->where('siswa.nama_siswa', 'like', '%' . $request->search . '%');
+        $query = Siswa::with('kelas')
+            ->leftJoin('kelas', 'siswa.kelas_id', '=', 'kelas.id')
+            ->orderByRaw(
+                'CAST(REGEXP_REPLACE(LOWER(kelas.nama_kelas), "[^0-9]", "") AS UNSIGNED) ASC'
+            )
+            ->select('siswa.*');
+
+        // 🔒 Kunci kelas untuk orang tua
+        if ($user->role === 'orangtua') {
+            $query->where('siswa.kelas_id', $user->kelas_id);
+        }
+
+        // 🔎 Search
+        if ($request->filled('search')) {
+            $query->where('siswa.nama_siswa', 'like', '%' . $request->search . '%');
+        }
+
+        // 📆 Tahun ajar (DEFAULT dari DB)
+        $tahunAjarList = Siswa::select('tahun_ajar')
+            ->distinct()
+            ->orderBy('tahun_ajar', 'desc')
+            ->pluck('tahun_ajar');
+
+        $tahunAjarDefault = $tahunAjarList->first();
+
+        $query->where(
+            'siswa.tahun_ajar',
+            $request->input('tahun_ajar', $tahunAjarDefault)
+        );
+
+        // 🏫 Filter kelas (ADMIN saja)
+        if ($user->role === 'admin' && $request->filled('kelas_id')) {
+            $query->where('siswa.kelas_id', $request->kelas_id);
+        }
+
+        $siswa = $query->paginate(10);
+
+        // 📦 Dropdown kelas
+        if ($user->role === 'admin') {
+            $kelas = Kelas::orderByRaw(
+                'CAST(REGEXP_REPLACE(LOWER(nama_kelas), "[^0-9]", "") AS UNSIGNED) ASC'
+            )->get();
+        } else {
+            $kelas = Kelas::where('id', $user->kelas_id)->get();
+        }
+
+        return view('siswa.index', compact('siswa', 'kelas', 'tahunAjarList'));
     }
-
-    // Filter Tahun Ajar
-    if ($request->filled('tahun_ajar')) {
-        $query->where('siswa.tahun_ajar', $request->tahun_ajar);
-    }
-
-    // Filter Kelas
-    if ($request->filled('kelas_id')) {
-        $query->where('siswa.kelas_id', $request->kelas_id);
-    }
-
-    $siswa = $query->paginate(10);
-
-    $kelas = Kelas::orderByRaw('CAST(REGEXP_REPLACE(LOWER(nama_kelas), "[^0-9]", "") AS UNSIGNED) ASC')
-            ->get();
-
-    $tahunAjarList = Kelas::select('tahun_ajar')->distinct()->pluck('tahun_ajar');
-
-    return view('siswa.index', compact('siswa', 'kelas', 'tahunAjarList'));
-}
 
 
     public function create()
@@ -130,7 +152,7 @@ class SiswaController extends Controller
 
     public function destroy($id)
     {
-      
+
         $siswa = Siswa::findOrFail($id);
         $siswa->delete();
 
@@ -139,7 +161,7 @@ class SiswaController extends Controller
 
     public function show($id)
     {
-         
+
         $siswa = Siswa::with('kelas')->findOrFail($id);
         return view('siswa.show', compact('siswa'));
     }
