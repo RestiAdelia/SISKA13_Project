@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Auth;
@@ -72,11 +73,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('siswa', SiswaController::class);
     Route::resource('mou', MouController::class);
     Route::resource('tugas', TugasController::class);
-    Route::resource('absen', App\Http\Controllers\AbsenController::class);
+    Route::resource('absen', AbsenController::class);
     // Per-siswa  and management (edit/update by siswa)
-    Route::get('absen/siswa/{siswa}/edit', [App\Http\Controllers\AbsenController::class, 'editSiswa'])->name('absen.siswa.edit');
-    Route::put('absen/siswa/{siswa}', [App\Http\Controllers\AbsenController::class, 'updateSiswa'])->name('absen.siswa.update');
-
+    Route::get('absen/siswa/{siswa}/edit', [AbsenController::class, 'editSiswa'])->name('absen.siswa.edit');
+    Route::put('absen/siswa/{siswa}', [AbsenController::class, 'updateSiswa'])->name('absen.siswa.update');
+    Route::get('/absen/siswa/{siswa}', [AbsenController::class, 'show'])->name('absen.siswa.show');
 
     // Bulk edit edit multiple students at once for a week
     Route::get('absen/bulk-edit', [App\Http\Controllers\AbsenController::class, 'bulkEdit'])->name('absen.bulk.edit');
