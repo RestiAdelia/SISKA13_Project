@@ -13,6 +13,7 @@ use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\OTPController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruDanStaffController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MouController;
@@ -22,10 +23,9 @@ use App\Http\Controllers\TugasController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 Route::resource('visi-misi', VisiMisiController::class)->middleware(['auth']);
 
 Route::middleware('auth')->group(function () {

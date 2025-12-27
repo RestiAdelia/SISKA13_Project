@@ -1,8 +1,10 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Visi Misi') }}
-        </h2>
+   <x-slot name="header">
+        <div class="text-left">
+            <h2 class="font-bold text-xl text-black leading-tight">
+                {{ __('Edit Visi Misi ') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-10 bg-gray-50 min-h-screen">

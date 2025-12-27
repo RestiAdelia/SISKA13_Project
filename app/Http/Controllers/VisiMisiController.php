@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VisiMisi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log; // BARIS INI DITAMBAHKAN
+use Illuminate\Support\Facades\Log; 
 
 class VisiMisiController extends Controller
 {
@@ -30,7 +30,7 @@ class VisiMisiController extends Controller
 
         VisiMisi::create($request->all());
 
-        return redirect()->route('visi-misi.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('visi-misi.index')->with('success_add', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -45,7 +45,7 @@ class VisiMisiController extends Controller
         $validatedData = $request->validate([
             'nama_sekolah' => 'required|string|max:255',
             'visi' => 'required|string',
-            'misi' => 'required|string', // Memvalidasi input hidden 'misi' yang sudah digabung (\n)
+            'misi' => 'required|string', 
             'akreditasi' => 'required|string|max:10',
         ]);
 
@@ -60,14 +60,14 @@ class VisiMisiController extends Controller
             $visimisi->update($dataToUpdate);
 
             // Sukses: Halaman pasti berpindah ke index
-            return redirect()->route('visi-misi.index')->with('success', 'Data Visi Misi berhasil diperbarui!');
+            return redirect()->route('visi-misi.index')->with('success_update', 'Data Visi Misi berhasil diperbarui!');
         } catch (\Illuminate\Database\Eloquent\MassAssignmentException $e) {
-            // Error Mass Assignment: Halaman tidak berpindah dan menampilkan pesan
-            Log::error("Mass Assignment Error: " . $e->getMessage()); // Menggunakan facade Log
+            
+            Log::error("Mass Assignment Error: " . $e->getMessage()); 
             return back()->with('error', 'Gagal update: Terjadi masalah Mass Assignment. Pastikan semua field (nama_sekolah, visi, misi, akreditasi) ada di $fillable Model VisiMisi.')->withInput();
         } catch (\Exception $e) {
-            // Error umum: Halaman tidak berpindah dan menampilkan pesan
-            Log::error("Update Visi Misi Gagal: " . $e->getMessage()); // Menggunakan facade Log
+
+            Log::error("Update Visi Misi Gagal: " . $e->getMessage()); 
             return back()->with('error', 'Gagal memperbarui data. Silakan coba lagi atau cek log server.')->withInput();
         }
     }
