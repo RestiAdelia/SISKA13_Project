@@ -31,7 +31,7 @@
             <div>
                 <a href="{{ route('guru_dan_staff.create') }}"
                     class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:scale-105">
-                    ➕ Tambah Data
+                     Tambah Data
                 </a>
 
             </div>

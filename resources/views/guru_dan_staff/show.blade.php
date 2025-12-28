@@ -11,18 +11,19 @@
     <!-- Background Gradasi Senada Section Kepsek -->
     <div class="py-10 min-h-screen bg-white bg-gradient-to-br from-gray-50 to-gray-100">
         <div class="max-w-5xl mx-auto px-4">
-            
+
             <!-- Title Section: Kiri, Line di Tengah -->
             <div class="text-start mb-10">
                 <h2 class="relative inline-block pb-4 text-3xl font-extrabold text-gray-800">
                     Profil Lengkap
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-[#800000] rounded-full"></span>
+                    <span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-[#800000] rounded-full"></span>
                 </h2>
             </div>
 
             <div class="bg-white shadow-2xl rounded-[40px] overflow-hidden border border-white">
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    
+
                     {{-- SISI FOTO (Gaya Foto Kepsek) --}}
                     <div class="p-8 bg-gray-50/50 flex flex-col items-center border-r border-gray-100 relative">
                         <!-- Ornamen Dekoratif Blur -->
@@ -33,7 +34,8 @@
                                 <img src="{{ asset('uploads/' . $guruDanStaff->foto) }}" alt="{{ $guruDanStaff->nama }}"
                                     class="relative z-10 rounded-[30px] shadow-xl w-60 h-72 object-cover border-8 border-white transition-transform duration-500 hover:scale-105">
                             @else
-                                <div class="relative z-10 rounded-[30px] shadow-md w-60 h-72 bg-gray-200 flex items-center justify-center border-8 border-white text-gray-400">
+                                <div
+                                    class="relative z-10 rounded-[30px] shadow-md w-60 h-72 bg-gray-200 flex items-center justify-center border-8 border-white text-gray-400">
                                     <span class="text-sm italic">Tidak ada foto</span>
                                 </div>
                             @endif
@@ -43,38 +45,27 @@
                             {{ $guruDanStaff->nama }}
                         </h3>
                         <p class="text-[#800000] font-semibold mt-1">{{ $guruDanStaff->jabatan ?? '-' }}</p>
-                        
-                      <div class="mt-8 w-full flex flex-row gap-3">
-    <!-- Tombol Edit (Setengah Lebar) -->
-    <a href="{{ route('guru_dan_staff.edit', $guruDanStaff->id) }}"
-        class="flex-1 flex items-center justify-center px-4 py-3 bg-[#800000] hover:bg-black text-white rounded-2xl font-bold transition-all duration-300 shadow-lg shadow-maroon/20 text-sm">
-        <i class="bi bi-pencil-square me-2"></i> Edit
-    </a>
-     <a href="{{ route('guru_dan_staff.index', $guruDanStaff->id) }}"
-        class="flex-1 flex items-center justify-center px-4 py-3  rounded-2xl font-bold transition-all duration-300 shadow-lg shadow-maroon/20 text-sm">
-        <i class="bi bi-pencil-square me-2"></i>Back
-    </a>
 
-    <!-- Tombol Delete (Setengah Lebar) -->
-   
-</div>
+                        <div class="mt-8 w-full flex flex-row gap-3">
+                            <!-- Tombol Edit (Setengah Lebar) -->
+                            <a href="{{ route('guru_dan_staff.edit', $guruDanStaff->id) }}"
+                                class="flex-1 flex items-center justify-center px-4 py-3 bg-[#800000] hover:bg-black text-white rounded-2xl font-bold transition-all duration-300 shadow-lg shadow-maroon/20 text-sm">
+                                <i class="bi bi-pencil-square me-2"></i> Edit
+                            </a>
+                            <a href="{{ route('guru_dan_staff.index', $guruDanStaff->id) }}"
+                                class="flex-1 flex items-center justify-center px-4 py-3  rounded-2xl font-bold transition-all duration-300 shadow-lg shadow-maroon/20 text-sm">
+                                <i class="bi bi-pencil-square me-2"></i>Back
+                            </a>
+
+                          
+
+                        </div>
                     </div>
 
                     {{-- Tombol Aksi --}}
 
-                    <div class="mt-10 flex justify-end gap-3">
-                         @if(Auth::user()->role !== 'orangtua')
-                        <a href="{{ route('guru_dan_staff.edit', $guruDanStaff->id) }}"
-                            class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                            Edit Data
-                        </a>
-                        @endif
-                        {{-- tombol kembalo --}}
-                        <a href="{{ route('guru_dan_staff.index') }}"
-                            class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-white-700 transition">
-                            ← Kembali
-                        </a>
-
+                    <div class="mt-10 flex justify-end gap-3 pl-8">
+                       
                         <!-- Informasi Kepegawaian -->
                         <div>
                             <h4 class="text-sm font-bold text-black uppercase tracking-[2px] mb-6 flex items-center">
@@ -83,7 +74,8 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
                                 <div class="border-b border-gray-50 pb-1">
                                     <p class="text-[10px] text-gray-400 uppercase font-bold">No Karpeg / NUPTK</p>
-                                    <p class="text-sm text-gray-800">{{ $guruDanStaff->no_karpeg ?? '-' }} / {{ $guruDanStaff->nuptk ?? '-' }}</p>
+                                    <p class="text-sm text-gray-800">{{ $guruDanStaff->no_karpeg ?? '-' }} /
+                                        {{ $guruDanStaff->nuptk ?? '-' }}</p>
                                 </div>
                                 <div class="border-b border-gray-50 pb-1">
                                     <p class="text-[10px] text-gray-400 uppercase font-bold">Pangkat/Golongan</p>
@@ -95,11 +87,13 @@
                                 </div>
                                 <div class="border-b border-gray-50 pb-1">
                                     <p class="text-[10px] text-gray-400 uppercase font-bold">Pendidikan</p>
-                                    <p class="text-sm text-gray-800">{{ $guruDanStaff->pendidikan_terakhir ?? '-' }}</p>
+                                    <p class="text-sm text-gray-800">{{ $guruDanStaff->pendidikan_terakhir ?? '-' }}
+                                    </p>
                                 </div>
                                 <div class="border-b border-gray-50 pb-1">
                                     <p class="text-[10px] text-gray-400 uppercase font-bold">Masa Kerja</p>
-                                    <p class="text-sm text-gray-800">{{ $guruDanStaff->masa_kerja_tahun ?? 0 }} Th, {{ $guruDanStaff->masa_kerja_bulan ?? 0 }} Bln</p>
+                                    <p class="text-sm text-gray-800">{{ $guruDanStaff->masa_kerja_tahun ?? 0 }} Th,
+                                        {{ $guruDanStaff->masa_kerja_bulan ?? 0 }} Bln</p>
                                 </div>
                                 <div class="border-b border-gray-50 pb-1">
                                     <p class="text-[10px] text-gray-400 uppercase font-bold">Sertifikasi</p>
@@ -107,7 +101,9 @@
                                 </div>
                                 <div class="border-b border-gray-50 pb-1">
                                     <p class="text-[10px] text-gray-400 uppercase font-bold">SK TMT</p>
-                                    <p class="text-sm text-gray-800">{{ $guruDanStaff->sk_tmt ? \Carbon\Carbon::parse($guruDanStaff->sk_tmt)->translatedFormat('d F Y') : '-' }}</p>
+                                    <p class="text-sm text-gray-800">
+                                        {{ $guruDanStaff->sk_tmt ? \Carbon\Carbon::parse($guruDanStaff->sk_tmt)->translatedFormat('d F Y') : '-' }}
+                                    </p>
                                 </div>
                                 <div class="border-b border-gray-50 pb-1">
                                     <p class="text-[10px] text-gray-400 uppercase font-bold">Keterangan</p>

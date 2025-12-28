@@ -5,8 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SDN 13 Kampung Kandang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 
@@ -297,6 +300,89 @@
             </div>
         </div>
     </section>
+    <section class="stats-wrapper">
+        <div class="container position-relative z-1">
+
+            <!-- Header  -->
+            <div class="text-center mb-5">
+                <h6 class="fw-bold text-uppercase"
+                    style="color: var(--dark3); letter-spacing: 0.4em; font-size: 14px;">
+                    Statistik Sekolah
+                </h6>
+            </div>
+
+            <!-- Row Statistik -->
+            <div class="d-flex align-items-center justify-content-between text-center mx-auto"
+                style="max-width: 1100px;">
+
+                <!-- Siswa  -->
+                <div class="flex-fill stat-item">
+                    <div class="counter-value display-4 text-dark1">
+                        <span class="counter" data-target="{{ $data['count_siswa'] }}">0</span>
+                    </div>
+                    <div class="stat-label" style="color: var(--dark1);">Siswa</div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <!-- Guru -->
+                <div class="flex-fill stat-item">
+                    <div class="counter-value display-5 text-dark2">
+                        <span class="counter" data-target="{{ $data['count_guru'] }}">0</span>
+                    </div>
+                    <div class="stat-label" style="color: var(--dark2);">Guru</div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <!-- Kelas -->
+                <div class="flex-fill stat-item">
+                    <div class="counter-value display-5 text-dark3">
+                        <span class="counter" data-target="{{ $data['count_kelas'] }}">0</span>
+                    </div>
+                    <div class="stat-label" style="color: var(--dark3);">Kelas</div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <!-- MoU -->
+                <div class="flex-fill stat-item">
+                    <div class="counter-value display-5" style="color: var(--mid);">
+                        <span class="counter" data-target="{{ $data['count_mou'] }}">0</span>
+                    </div>
+                    <div class="stat-label" style="color: var(--mid);">Mitra</div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <!-- Kegiatan -->
+                <div class="flex-fill stat-item">
+                    <div class="counter-value display-5 text-secondary">
+                        <span class="counter" data-target="{{ $data['total_kegiatan'] }}">0</span>
+                    </div>
+                    <div class="stat-label text-secondary">Kegiatan</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Animasi Gelombang -->
+        <div class="waves-container">
+            <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave"
+                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(239, 136, 173, 0.2)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(165, 56, 96, 0.1)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(76, 0, 39, 0.05)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#ffffff" />
+                </g>
+            </svg>
+        </div>
+    </section>
     <!-- Kegiatan -->
     <section id="kegiatan" class="py-5 bg-light">
         <div class="container">
@@ -487,41 +573,7 @@
             </div>
         </div>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.filter-btn');
-            const items = document.querySelectorAll('.filter-item');
-
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Toggle active class
-                    buttons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    const filter = button.getAttribute('data-filter');
-
-                    items.forEach(item => {
-                        // Reset opacity for transition effect
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.8)';
-
-                        setTimeout(() => {
-                            if (filter === 'all' || item.classList.contains(
-                                    filter)) {
-                                item.style.display = 'block';
-                                setTimeout(() => {
-                                    item.style.opacity = '1';
-                                    item.style.transform = 'scale(1)';
-                                }, 50);
-                            } else {
-                                item.style.display = 'none';
-                            }
-                        }, 300);
-                    });
-                });
-            });
-        });
-    </script>
+   
 
 
 </body>

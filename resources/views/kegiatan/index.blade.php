@@ -5,6 +5,7 @@
             <h2 class="font-bold text-xl text-black leading-tight">
                 {{ __('Data Kegiatan') }}
             </h2>
+
         </div>
     </x-slot>
 
@@ -31,7 +32,7 @@
             @if(Auth::user()->role !== 'orangtua')
             <a href="{{ route('kegiatan.create') }}"
                 class="bg-[#560029] hover:bg-[#3f0020] text-white px-5 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 transform hover:scale-105">
-                ➕ Tambah Kegiatan
+                 Tambah Kegiatan
             </a>
             @endif
 

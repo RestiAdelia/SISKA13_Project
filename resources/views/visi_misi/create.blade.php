@@ -91,7 +91,7 @@
                         </div>
 
                         <button type="button" id="add-misi-btn"
-                            class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-blue-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 transition ease-in-out duration-150 shadow-md">
+                            class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#420516] border-2 border-[#CEA335] rounded-lg font-bold text-xs text-[#CEA335] uppercase tracking-widest hover:bg-[#CEA335] hover:text-white transition ease-in-out duration-200 shadow-md">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -113,7 +113,7 @@
                         {{-- Tombol Simpan (Green Primary) --}}
                         <button type="submit" id="submit-form-btn"
                             class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg font-semibold text-sm uppercase tracking-widest hover:bg-green-700 active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md"
-                            style="background-color: #10B981 !important; color: white !important;">
+                            style="background-color: #540a21 !important; color: white !important;">
                             SIMPAN VISI MISI
                         </button>
 

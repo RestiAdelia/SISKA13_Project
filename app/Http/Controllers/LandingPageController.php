@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\VisiMisi;
-use App\Models\Kegiatan; 
+use App\Models\Kegiatan;
 use App\Models\GuruDanStaff;
+use App\Models\Kelas;
+use App\Models\Siswa;
+use Illuminate\Support\Facades\DB;
 
 class LandingPageController extends Controller
 {
@@ -30,6 +33,15 @@ class LandingPageController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('landing_page', compact('visimisi', 'kegiatan', 'staff', 'kepsek'));
+          $data = [
+                'count_siswa' => Siswa::count(),
+                'count_guru'  => GuruDanStaff::count(),
+                'count_kelas' => Kelas::count(),
+                'count_mou'   => DB::table('mou')->count(),
+                'total_kegiatan' => Kegiatan::count(),
+                
+            ];
+
+        return view('landing_page', compact('visimisi', 'kegiatan', 'staff', 'kepsek' , 'data'));
     }
 }
