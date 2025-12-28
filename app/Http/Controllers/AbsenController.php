@@ -103,28 +103,28 @@ class AbsenController extends Controller
 
     //     return view('absen.edit-siswa', compact('siswa', 'start', 'end', 'absens'));
     // }
-public function editSiswa(Siswa $siswa, Request $request)
-{
-    $user = Auth::user();
+    public function editSiswa(Siswa $siswa, Request $request)
+    {
+        $user = Auth::user();
 
-    // Pastikan locale diatur ke Indonesia
-    \Carbon\Carbon::setLocale('id');
+        // Pastikan locale diatur ke Indonesia
+        \Carbon\Carbon::setLocale('id');
 
-    if ($user->role === 'orangtua' && $siswa->kelas_id !== $user->kelas_id) {
-        abort(403, 'Anda tidak memiliki akses ke data siswa ini.');
+        if ($user->role === 'orangtua' && $siswa->kelas_id !== $user->kelas_id) {
+            abort(403, 'Anda tidak memiliki akses ke data siswa ini.');
+        }
+
+        $week = $request->week ? \Carbon\Carbon::parse($request->week) : now();
+        $start = $week->copy()->startOfWeek(\Carbon\Carbon::MONDAY);
+        $end = $start->copy()->addDays(4);
+
+        $absens = Absen::where('siswa_id', $siswa->id)
+            ->whereBetween('date', [$start->toDateString(), $end->toDateString()])
+            ->get()
+            ->keyBy('date');
+
+        return view('absen.edit-siswa', compact('siswa', 'start', 'end', 'absens'));
     }
-
-    $week = $request->week ? \Carbon\Carbon::parse($request->week) : now();
-    $start = $week->copy()->startOfWeek(\Carbon\Carbon::MONDAY);
-    $end = $start->copy()->addDays(4);
-
-    $absens = Absen::where('siswa_id', $siswa->id)
-        ->whereBetween('date', [$start->toDateString(), $end->toDateString()])
-        ->get()
-        ->keyBy('date');
-
-    return view('absen.edit-siswa', compact('siswa', 'start', 'end', 'absens'));
-}
     public function updateSiswa(Request $request, Siswa $siswa)
     {
         $user = Auth::user();
@@ -154,7 +154,38 @@ public function editSiswa(Siswa $siswa, Request $request)
 
         return redirect()->route('absen.index', ['week' => $request->week])->with('success', 'Absensi berhasil disimpan');
     }
+    public function destroy(Absen $absen)
+    {
+        $user = Auth::user();
 
+        // Keamanan: Cek apakah absen ini milik siswa di kelas yang boleh diakses
+        if ($user->role === 'orangtua' && $absen->siswa->kelas_id !== $user->kelas_id) {
+            abort(403, 'Anda tidak memiliki akses.');
+        }
+
+        $absen->delete();
+
+        return redirect()->back()->with('success', 'Data absensi berhasil dihapus.');
+    }
+    public function destroyWeekly(Request $request, Siswa $siswa)
+{
+    // Hanya admin yang boleh hapus
+    if (Auth::user()->role === 'orangtua') {
+        abort(403);
+    }
+
+    $request->validate([
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+    ]);
+
+    // Menghapus absen siswa tersebut hanya di antara tanggal start dan end
+    Absen::where('siswa_id', $siswa->id)
+        ->whereBetween('date', [$request->start_date, $request->end_date])
+        ->delete();
+
+    return redirect()->back()->with('success', 'Data absensi siswa berhasil direset untuk minggu ini.');
+}
     public function show(Siswa $siswa, Request $request)
     {
         $user = Auth::user();

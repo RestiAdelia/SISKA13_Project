@@ -79,9 +79,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('absen/siswa/{siswa}', [AbsenController::class, 'updateSiswa'])->name('absen.siswa.update');
     Route::get('/absen/siswa/{siswa}', [AbsenController::class, 'show'])->name('absen.siswa.show');
 
-    // Bulk edit edit multiple students at once for a week
-    Route::get('absen/bulk-edit', [App\Http\Controllers\AbsenController::class, 'bulkEdit'])->name('absen.bulk.edit');
-    Route::put('absen/bulk-update', [App\Http\Controllers\AbsenController::class, 'bulkUpdate'])->name('absen.bulk.update');
+    // Route untuk reset satu minggu
+//Route::delete('/absen/{siswa}/reset-weekly', [AbsenController::class, 'destroyWeekly'])->name('absen.destroyWeekly');
+Route::delete('/absen/siswa/{siswa}/reset', [AbsenController::class, 'destroyWeekly'])->name('absen.destroyWeekly');
+    // Route untuk hapus satu record spesifik
+    Route::delete('/absen/{absen}', [AbsenController::class, 'destroy'])->name('absen.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {
