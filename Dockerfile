@@ -15,8 +15,11 @@ COPY . .
 # Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Permission
+# Permissions
 RUN chmod -R 775 storage bootstrap/cache
 
-# Railway will inject PORT
+# Create storage link (safe even if exists)
+RUN php artisan storage:link || true
+
+# Start server (Railway injects PORT)
 CMD php -S 0.0.0.0:${PORT} -t public
