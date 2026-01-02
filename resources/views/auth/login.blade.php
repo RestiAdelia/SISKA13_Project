@@ -34,7 +34,7 @@
 
                 <!-- Email Address -->
                 <div>
-                    <!-- Label diubah ke text-white -->
+                   
                     <label for="email" class="block text-[10px] font-bold text-white uppercase tracking-[0.2em] ml-2 mb-2">Alamat Email</label>
                     <div class="relative group">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -53,7 +53,7 @@
 
                 <!-- Password -->
                 <div>
-                    <!-- Label diubah ke text-white -->
+                   
                     <label for="password" class="block text-[10px] font-bold text-white uppercase tracking-[0.2em] ml-2 mb-2">Kata Sandi</label>
                     <div class="relative group">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
