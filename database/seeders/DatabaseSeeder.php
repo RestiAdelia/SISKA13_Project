@@ -12,13 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Akun testing / admin (opsional)
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@sekolah.id',
-            'role' => 'admin',
-            'password' => bcrypt('admin123'),
-        ]);
+       
 
         // Panggil seeder akun orang tua
         $this->call([
