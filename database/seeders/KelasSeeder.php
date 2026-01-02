@@ -30,6 +30,46 @@ class KelasSeeder extends Seeder
                 'Geografi'
             ]
         ]);
+         Kelas::create([
+            'nama_kelas' => 'XI IPS 2',
+            'tahun_ajar' => '2024/2025',
+            'guru_id' => 2,
+            'mata_pelajaran' => [
+                'Ekonomi',
+                'Sosiologi',
+                'Geografi'
+            ]
+        ]);
+         Kelas::create([
+            'nama_kelas' => 'XI IPS 2',
+            'tahun_ajar' => '2024/2025',
+            'guru_id' => 2,
+            'mata_pelajaran' => [
+                'Ekonomi',
+                'Sosiologi',
+                'Geografi'
+            ]
+        ]);
+         Kelas::create([
+            'nama_kelas' => 'XI IPS 2',
+            'tahun_ajar' => '2024/2025',
+            'guru_id' => 2,
+            'mata_pelajaran' => [
+                'Ekonomi',
+                'Sosiologi',
+                'Geografi'
+            ]
+        ]);
+         Kelas::create([
+            'nama_kelas' => 'XI IPS 2',
+            'tahun_ajar' => '2024/2025',
+            'guru_id' => 2,
+            'mata_pelajaran' => [
+                'Ekonomi',
+                'Sosiologi',
+                'Geografi'
+            ]
+        ]);
 
        
     }
