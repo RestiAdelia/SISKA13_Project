@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
 
         // Panggil seeder akun orang tua
         $this->call([
-            OrangTuaSeeder::class,
-            KelasSeeder::class,
             UserSeeder::class,
+            KelasSeeder::class,
+            OrangTuaSeeder::class,
         ]);
     }
 }
