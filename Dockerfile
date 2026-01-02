@@ -22,4 +22,5 @@ RUN chmod -R 775 storage bootstrap/cache
 RUN php artisan storage:link || true
 
 # Start server (Railway injects PORT)
-CMD php -S 0.0.0.0:${PORT} -t public
+CMD php artisan migrate --force && php -S 0.0.0.0:${PORT} -t public
+
